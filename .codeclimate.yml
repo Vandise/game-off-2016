@@ -1,0 +1,22 @@
+languages:
+  JavaScript: true
+engines:
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - javascript
+  fixme:
+    enabled: true
+  eslint:
+    enabled: true
+ratings:
+  paths:
+  - "**.js"
+  - "**.jsx"
+exclude_paths:
+  - "src/static/*"
+  - "src/stylesheets/*"
+  - "webpack.config.js"
+  - "webpack.production.config.js"
+  - "gulpfile.js"

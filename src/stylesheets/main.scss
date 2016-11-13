@@ -1,0 +1,16 @@
+.wrapper {
+  color:    white;
+  width:    950px;
+  height:   600px;
+  position: relative;
+  background-color: black;
+
+  .button {
+    padding: 0.5em 1.5em;
+    background-color: black;
+
+    &.red {
+      background-color: #D45659;
+    }
+  }
+}
