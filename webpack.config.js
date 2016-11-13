@@ -32,7 +32,8 @@ module.exports = {
       'phaser': phaser,
       'pixi': pixi,
       'p2': p2
-    }
+    },
+    root: path.resolve('./src/game'),
   },
   module: {
     loaders: [

@@ -1,0 +1,1 @@
+export const INITIALIZE_CLIENT = 'INITALIZE_CLIENT';
