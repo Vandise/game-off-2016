@@ -1,4 +1,5 @@
 import React from 'react';
+import { executeCode } from '../../actions/playerActions';
 
 // eslint-disable-next-line no-unused-vars
 import Styles from '../../../stylesheets/menus/codeMenu';
@@ -9,6 +10,7 @@ export default class extends React.Component {
     super(props);
     this.handleTabs = this.handleTabs.bind(this);
     this.clearForm = this.clearForm.bind(this);
+    this.runCode = this.runCode.bind(this);
   }
 
   handleTabs(e) {
@@ -25,6 +27,11 @@ export default class extends React.Component {
     }
   }
 
+  runCode() {
+    const code = this.refs.miCode.value;
+    this.props.dispatch(executeCode(code));
+  }
+
   clearForm() {
     this.refs.miCode.value = '';
   }
@@ -39,7 +46,7 @@ export default class extends React.Component {
           <textarea className='miCode' ref='miCode' onKeyDown={(e) => this.handleTabs(e) }></textarea>
         </div>
         <div className='codeFooter'>
-          <span className='button'>Run</span>
+          <span className='button' onClick={() => this.runCode() }>Run</span>
           <span className='button'>Terminate</span>
           <span className='button' onClick={() => this.clearForm() }>Clear</span>
         </div>

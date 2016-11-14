@@ -9,7 +9,7 @@ gulp.task('copy-assets', function() {
   return gulp.src('src/static/**').pipe(gulp.dest('public'));
 });
 
-gulp.task('grammar', shell.task(['node node_modules/.bin/jacob -t src/game/system/mis/grammar/tokens.jacoblex -l src/game/system/mis/lexer.js']));
+gulp.task('grammar', shell.task(['node node_modules/.bin/jacob -t src/game/system/mis/grammar/tokens.jacoblex -l src/game/system/mis/lexer.js -g src/game/system/mis/grammar/grammar.jacobgram -p src/game/system/mis/parser.js']));
 
 gulp.task("webpack:build", function(callback) {
   return webpack(webpackConfig, function(err, stats) {

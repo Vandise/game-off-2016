@@ -12,6 +12,10 @@ digits = [0-9]
   return 'T_EQUAL';  
 }
 
+<>!= {
+  return 'T_NOT_EQUAL';  
+}
+
 <>\> {
   return 'T_GT';
 }
@@ -110,5 +114,9 @@ digits = [0-9]
   this.jjval = this.jjtext;
   return 'T_IDENTIFIER';
 }
+
+<>\s* { }
+
+<>.   { return this.jjtext; }
 
 <>$   { return 'T_EOF'; }

@@ -6,6 +6,10 @@ export const clientMiddleware = () => {
     if (action.type === types.TRANSITION_STATE) {
       store.getState().client.transitionState(action.payload.requestedState);
     }
+    if (action.type === types.EXECUTE_CODE) {
+      const driver = new SystemDriver(action.payload.code);
+      driver.compile();
+    }
     return next(action);
   };
 };

@@ -5,3 +5,4 @@ node_modules
 public/
 .nyc_output/
 src/game/system/mis/lexer.js
+src/game/system/mis/parser.js

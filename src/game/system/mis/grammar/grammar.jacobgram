@@ -1,0 +1,40 @@
+%moduleName MisParser
+%mode LALR
+
+%left 'T_MULTIPLY' 'T_DIVIDE'
+%left 'T_PLUS' 'T_MINUS'
+%left 'T_GT' 'T_GE' 'T_LT' 'T_LE'
+%left 'T_COLONEQUAL' 'T_NOT_EQUAL'
+
+Program = { Expressions } function(expressions){ console.log('AST generated'); };
+
+Expressions = 
+    Expression function(exp) {
+      console.log('Expression');
+    }
+  | Expressions Terminator Expression function(expressions, _, exp) {
+      console.log('Expressions Terminator Expression');    
+    }
+  /*
+  | Expressions Terminator function(exp, _) {
+      console.log('Single expression');
+    }
+  */
+  ;
+
+Expression =
+    Literal
+  ;
+
+Literal =
+    'T_STRING' function(string) {
+      console.log('Found string', string);
+    }
+  | 'T_INTEGER' function(integer) {
+      console.log('Found integer', integer);
+    }
+  ;
+
+Terminator =
+    'T_TERMINATOR'
+  ;
