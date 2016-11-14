@@ -7,7 +7,7 @@ import { closeAllMenus } from '../actions/menuActions';
 
 export default class extends Phaser.Game {
 
-  constructor(dispatch, container = 'gameContainer', width = 950, height = 600) {
+  constructor(dispatch, container = 'gameContainer', width = 960, height = 600) {
     super(width, height, Phaser.AUTO, container, null);
     this.playerInventory = {};
     this.isInitialized = false;

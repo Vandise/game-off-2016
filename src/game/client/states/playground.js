@@ -8,12 +8,14 @@ export default class extends Phaser.State {
   }
 
   preload() {
+    this.load.image('gridBg', 'assets/gridsquare.jpg', 32, 36);
     this.load.spritesheet('mi', 'assets/player.png', 32, 36, 12);
     this.load.audio('dungeon_music', ['assets/audio/dungeon_1.mp3', 'assets/audio/dungeon_2.mp3', 'assets/audio/intro.mp3', ]);
   }
 
   create() {
     this.game.time.advancedTiming = true;
+    const gridSprite = this.game.add.tileSprite(0, 0, this.game.width, this.game.height, 'gridBg');
     // Lots of stuff to do here!
     // - Initialize player
     // - load command (Mi script terminal)
