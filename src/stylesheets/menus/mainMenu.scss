@@ -1,0 +1,21 @@
+div.mainMenu {
+  position: absolute;
+  width: 100%;
+  ul {
+    padding: 0px;
+    margin: 0px;
+    li {
+      margin: 10px;
+      width: 50%;
+      padding: 1em;
+      transition: 0.5s;
+      text-align: center;
+      list-style-type: none;
+      margin: 0px auto 10px auto;
+      background-color: rgba(92, 91, 91, 0.7);
+    }
+    li:hover {
+      background-color: rgba(92, 91, 91, 1);
+    }
+  }
+}

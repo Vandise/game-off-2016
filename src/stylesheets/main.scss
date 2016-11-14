@@ -1,10 +1,14 @@
+@font-face {
+  font-family: pixeled;
+  src: url(/assets/fonts/Pixeled.ttf);
+}
+
 .wrapper {
   color:    white;
   width:    950px;
   height:   600px;
-  position: relative;
   background-color: black;
-
+  position: absolute;
   .button {
     padding: 0.5em 1.5em;
     background-color: black;
@@ -15,10 +19,18 @@
   }
 }
 
+h1 {
+  font: 45px pixeled;
+  padding-bottom: 0px;
+  margin-bottom: 0px; 
+}
+
 .menuContainer {
-  position: absolute;
-  bottom: 25px;
-  left: 10%;
-  width: 75%;
+  width: 100%;
   text-align: center;
+}
+
+.menu {
+  position: absolute;
+  width: 100%;
 }
