@@ -4,6 +4,98 @@
 digits = [0-9]
 %%
 
+<>\n {
+  return 'T_TERMINATOR';
+}
+
+<>= {
+  return 'T_EQUAL';  
+}
+
+<>\> {
+  return 'T_GT';
+}
+
+<>\>= {
+  return 'T_GE';
+}
+
+<>\< {
+  return 'T_LT';
+}
+
+<>\>= {
+  return 'T_LE';
+}
+
+<>+ {
+  return 'T_PLUS';
+}
+
+<>- {
+  return 'T_MINUS';
+}
+
+<>\[ {
+  return 'T_OPEN_BRACKET';
+}
+
+<>\] {
+  return 'T_CLOSE_BRACKET';
+}
+
+<>* {
+  return 'T_MULTIPLY';
+}
+
+<>\/ {
+  return 'T_DIVIDE';
+}
+
+<>\% {
+  return 'T_MODULO';
+}
+
+<>:= {
+  return 'T_COLONEQUAL';
+}
+
+<>do {
+  return 'T_DO';
+}
+
+<>while {
+  return 'T_WHILE';
+}
+
+<>loop {
+  return 'T_LOOP';
+}
+
+<>until {
+  return 'T_UNTIL';
+}
+
+<>if {
+  return 'T_IF';
+}
+
+<>else {
+  return 'T_ELSE';
+}
+
+<>end {
+  return 'T_END';
+}
+
+<>\( {
+  return 'T_OPEN_PAREN';
+}
+
+<>\) {
+  return 'T_CLOSE_PAREN';
+}
+
 <>{digits}+   {
     this.jjval = parseInt(this.jjtext);
     return 'T_INTEGER';
@@ -19,4 +111,4 @@ digits = [0-9]
   return 'T_IDENTIFIER';
 }
 
-<>$   { return 'EOF'; }
+<>$   { return 'T_EOF'; }
