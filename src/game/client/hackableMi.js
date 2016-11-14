@@ -2,6 +2,8 @@ import 'pixi';
 import 'p2';
 import Phaser from 'phaser';
 import MainMenu from './states/mainMenu';
+import Playground from './states/playground';
+import { closeAllMenus } from '../actions/menuActions';
 
 export default class extends Phaser.Game {
 
@@ -10,12 +12,18 @@ export default class extends Phaser.Game {
     this.playerInventory = {};
     this.isInitialized = false;
     this.state.add('MainMenu', MainMenu, false);
+    this.state.add('Playground', Playground, false);
     this.dispatch = dispatch;
   }
 
   initialize() {
     this.isInitialized = true;
     this.state.start('MainMenu');
+  }
+
+  transitionState(state) {
+    this.dispatch(closeAllMenus());
+    this.state.start(state);
   }
 
 }

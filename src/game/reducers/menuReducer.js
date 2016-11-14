@@ -1,4 +1,4 @@
-import { TOGGLE_MENU } from '../constants/actions';
+import { TOGGLE_MENU, CLOSE_ALL_MENUS } from '../constants/actions';
 const initialState = {};
 
 export default (state = initialState, action) => {
@@ -8,6 +8,14 @@ export default (state = initialState, action) => {
       open: action.payload.display,
     };
     return Object.assign({}, state, data);
+  }
+
+  if (action.type === CLOSE_ALL_MENUS) {
+    const data = {};
+    Object.keys(state).forEach( (key) => {
+      data[key] = { open: false };
+    });
+    return data;
   }
   return state;
 };

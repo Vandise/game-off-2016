@@ -1,4 +1,4 @@
-import { INITIALIZE_CLIENT } from '../constants/actions';
+import * as types from '../constants/actions';
 import GameClient from '../client/hackableMi';
 
 export function initializeClient(dispatch) {
@@ -7,7 +7,17 @@ export function initializeClient(dispatch) {
     dispatch,
   };
   return {
-    type: INITIALIZE_CLIENT,
+    type: types.INITIALIZE_CLIENT,
+    payload,
+  };
+}
+
+export function transitionGameState(requestedState) {
+  const payload = {
+    requestedState,
+  };
+  return {
+    type: types.TRANSITION_STATE,
     payload,
   };
 }

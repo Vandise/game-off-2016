@@ -1,6 +1,10 @@
+import * as types from '../constants/actions';
+
 export const clientMiddleware = () => {
   return store => next => action => {
-    console.log('TODO: dispatch user input to Phaser here', store, action);
+    if (action.type === types.TRANSITION_STATE) {
+      store.getState().client.transitionState(action.payload.requestedState);
+    }
     return next(action);
   };
 };
