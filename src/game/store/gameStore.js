@@ -12,6 +12,9 @@ const initialState = {
     consoleMenu: { open: false },
     playerMenu: { open: false },
   },
+  console: {
+    messages: [],
+  },
 };
 
 const reducers = combineReducers(Reducers);

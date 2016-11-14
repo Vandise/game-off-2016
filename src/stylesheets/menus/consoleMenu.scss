@@ -14,4 +14,21 @@ div.consoleMenu {
       padding: 0;
     }
   }
+  .consoleBody {
+    margin-top: 35px;
+    text-align: left;
+    ul {
+      height: 85px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      direction: ltr;
+      li {
+        list-style-type: none;
+        padding: 3px 0px;
+        &.odd {
+          background-color: #1A2C40;
+        }
+      }
+    }
+  }
 }

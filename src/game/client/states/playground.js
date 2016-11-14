@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import Player from '../objects/player';
 import { setMenu } from '../../actions/menuActions';
+import { addConsoleMessage } from '../../actions/consoleActions';
 
 export default class extends Phaser.State {
 
@@ -32,6 +33,7 @@ export default class extends Phaser.State {
     this.game.dispatch(setMenu('codeMenu', true));
     this.game.dispatch(setMenu('consoleMenu', true));
     this.game.dispatch(setMenu('playerMenu', true));
+    this.game.dispatch(addConsoleMessage('Initialized Playground testing area'));
     this.game.music = this.add.audio('dungeon_music');
     this.game.music.play();
     return true;
