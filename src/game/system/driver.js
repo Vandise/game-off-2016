@@ -1,4 +1,5 @@
 import { SYSTEM_LANGUAGE } from '../constants/system';
+import { addConsoleMessage } from '../actions/consoleActions';
 
 const Lexer = require(`./${SYSTEM_LANGUAGE}/lexer`);
 const Parser = require(`./${SYSTEM_LANGUAGE}/parser`);
@@ -19,7 +20,11 @@ export default class SystemDriver {
       const lexer = new Lexer();
       const parser = new Parser();
       lexer.setInput(this.codeText);
-      parser.parse(lexer);
+      try {
+        parser.parse(lexer);
+      } catch(e) {
+        this.store.dispatch(addConsoleMessage(e.message));
+      }
       return true;
     }
     return false;    
