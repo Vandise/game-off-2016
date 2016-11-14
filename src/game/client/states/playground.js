@@ -9,7 +9,7 @@ export default class extends Phaser.State {
 
   preload() {
     this.load.spritesheet('mi', 'assets/player.png', 32, 36, 12);
-    this.load.audio('dungeon_music', ['assets/audio/dungeon_1.mp3', 'assets/audio/dungeon_1.mp3', 'assets/audio/intro.mp3', ]);
+    this.load.audio('dungeon_music', ['assets/audio/dungeon_1.mp3', 'assets/audio/dungeon_2.mp3', 'assets/audio/intro.mp3', ]);
   }
 
   create() {
@@ -20,6 +20,7 @@ export default class extends Phaser.State {
     // - show player inventory (1 item)
     this.game.dispatch(setMenu('codeMenu', true));
     this.game.dispatch(setMenu('consoleMenu', true));
+    this.game.dispatch(setMenu('playerMenu', true));
     this.game.music = this.add.audio('dungeon_music');
     this.game.music.play();
     return true;

@@ -31,5 +31,9 @@ div.codeMenu {
     background-color: #1A2C40;
     margin: 5px;
     cursor: pointer;
+    &:hover {
+      background-color: #f82939;
+      /*background-color: #63cce3;*/
+    }
   }
 }

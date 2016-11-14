@@ -1,0 +1,20 @@
+div.playerMenu {
+  position: absolute;
+  right: -350px;
+  width: 350px;
+  bottom: -120px;
+  height: 120px;
+  background-color: #1A2C40;
+  border-left: 1px dotted #2f496c;
+  .header {
+    float: left;
+    text-align: left;
+    width: 100%;
+    background-color: #111c2a;
+    border-top: 1px dotted #2f496c;
+    h3 {
+      margin: 5px;
+      padding: 0;
+    }
+  }
+}

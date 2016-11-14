@@ -14,7 +14,7 @@ export default class extends React.Component {
   handleTabs(e) {
     const tabKey = 9;
     if (e.keyCode === tabKey) {
-      let reference = this.refs.miCode;
+      const reference = this.refs.miCode;
       let val = reference.value,
           start = reference.selectionStart,
           end = reference.selectionEnd;

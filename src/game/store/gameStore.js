@@ -10,6 +10,7 @@ const initialState = {
     aboutMenu: { open: false },
     codeMenu: { open: false },
     consoleMenu: { open: false },
+    playerMenu: { open: false },
   },
 };
 
