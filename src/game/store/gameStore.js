@@ -7,6 +7,7 @@ const initialState = {
   client: null,
   menu: {
     mainMenu: { open: false },
+    aboutMenu: { open: false },
   },
 };
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { setMenu } from '../../actions/menuActions';
 
 // eslint-disable-next-line no-unused-vars
 import Styles from '../../../stylesheets/menus/mainMenu';
@@ -13,7 +14,7 @@ export default (props) => {
           <li>How to play</li>
           <li>Tutorial</li>
           <li>Playground</li>
-          <li>About</li>
+          <li onClick={ () => props.dispatch(setMenu('aboutMenu', true)) }>About</li>
         </ul>
       </div>
     </div>

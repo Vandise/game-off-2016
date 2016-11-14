@@ -25,6 +25,12 @@ h1 {
   margin-bottom: 0px; 
 }
 
+.pixeled {
+  font: 25px pixeled;
+  padding-bottom: 0px;
+  margin-bottom: 0px; 
+}
+
 .menuContainer {
   width: 100%;
   text-align: center;
@@ -33,4 +39,28 @@ h1 {
 .menu {
   position: absolute;
   width: 100%;
+  .basic {
+    margin: 0 auto;
+    background-color: rgba(92, 91, 91, 1);
+    width: 40%;
+    padding: 1em;
+  }
+  .message-modal {
+    color:    white;
+    width:    450px;
+    top:      125px;
+    left:     27%;
+    position: absolute;
+    z-index:  99;
+    background-color: #7b0000;
+    .modal-header {
+      padding: 1em 1em 0.5em 1em; }
+    .modal-body {
+      padding: 0em 1em; }
+    .modal-footer {
+      padding: 1.5em 1em 1.5em 1em;
+      background-color: white; }
+    .button {
+      cursor: pointer; }
+  }
 }
