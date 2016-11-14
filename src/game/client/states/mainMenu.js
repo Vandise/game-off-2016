@@ -17,8 +17,8 @@ export default class extends Phaser.State {
   create() {
     const bg = this.add.sprite(950, 600, 'mainmenu_bg');
     const mi = this.add.sprite(445, 490, 'mi');
-    const music = this.add.audio('intro_music');
-    music.play();
+    this.game.music = this.add.audio('intro_music');
+    this.game.music.play();
     mi.animations.add('walk_down', [6, 7, 8], 8, true);
     mi.animations.play('walk_down');
     let scale = 1;

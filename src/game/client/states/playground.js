@@ -13,7 +13,14 @@ export default class extends Phaser.State {
   }
 
   create() {
+    // Lots of stuff to do here!
+    // - Initialize player
+    // - load command (Mi script terminal)
+    // - load command console
+    // - show player inventory (1 item)
     console.log('Developer playgroup and mi language testing');
+    this.game.music = this.add.audio('dungeon_music');
+    this.game.music.play();
     return true;
   }
 

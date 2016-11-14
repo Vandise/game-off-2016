@@ -14,6 +14,7 @@ export default class extends Phaser.Game {
     this.state.add('MainMenu', MainMenu, false);
     this.state.add('Playground', Playground, false);
     this.dispatch = dispatch;
+    this.music = null;
   }
 
   initialize() {
@@ -22,6 +23,9 @@ export default class extends Phaser.Game {
   }
 
   transitionState(state) {
+    if (this.music != null) {
+      this.music.pause();
+    }
     this.dispatch(closeAllMenus());
     this.state.start(state);
   }
