@@ -19,7 +19,7 @@ export default class extends Phaser.State {
     // - load command console
     // - show player inventory (1 item)
     this.game.dispatch(setMenu('codeMenu', true));
-    console.log('Developer playgroup and mi language testing');
+    this.game.dispatch(setMenu('consoleMenu', true));
     this.game.music = this.add.audio('dungeon_music');
     this.game.music.play();
     return true;

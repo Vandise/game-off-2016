@@ -8,6 +8,7 @@ export default class extends React.Component {
   constructor(props) {
     super(props);
     this.handleTabs = this.handleTabs.bind(this);
+    this.clearForm = this.clearForm.bind(this);
   }
 
   handleTabs(e) {
@@ -24,6 +25,10 @@ export default class extends React.Component {
     }
   }
 
+  clearForm() {
+    this.refs.miCode.value = '';
+  }
+
   render() {
     return (
       <div className='codeMenu'>
@@ -35,7 +40,8 @@ export default class extends React.Component {
         </div>
         <div className='codeFooter'>
           <span className='button'>Run</span>
-          <span className='button'>Clear</span>
+          <span className='button'>Terminate</span>
+          <span className='button' onClick={() => this.clearForm() }>Clear</span>
         </div>
       </div>
     );

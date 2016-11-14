@@ -1,0 +1,17 @@
+div.consoleMenu {
+  position: absolute;
+  bottom: -120px;
+  height: 120px;
+  width: 950px;
+  background-color: #111c2a;
+  .header {
+    float: left;
+    text-align: left;
+    width: 100%;
+    background-color: #1A2C40;
+    h3 {
+      margin: 5px;
+      padding: 0;
+    }
+  }
+}
