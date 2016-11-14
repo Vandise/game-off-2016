@@ -1,0 +1,34 @@
+div.codeMenu {
+  position: absolute;
+  right: -350px;
+  width: 350px;
+  background-color: #111c2a;
+  height: 600px;
+  .header {
+    text-align: left;
+    h3 {
+      margin: 15px 15px;
+    }
+  }
+  .codeBody {
+    height: 83%;
+    textarea {
+      font-size: 90%;
+      background-color: #111c2a;
+      resize: none;
+      outline: none !important;
+      border: 1px dotted #2f496c;
+      color: #63cce3;
+      width: 90%;
+      height: 90%;
+      &:focus {
+        outline: none !important;
+        border: 1px dotted #2f496c;
+      }
+    }
+  }
+  .button {
+    background-color: #1A2C40;
+    margin: 5px;
+  }
+}

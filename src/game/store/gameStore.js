@@ -8,6 +8,7 @@ const initialState = {
   menu: {
     mainMenu: { open: false },
     aboutMenu: { open: false },
+    codeMenu: { open: false }
   },
 };
 
