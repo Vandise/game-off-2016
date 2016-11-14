@@ -9,7 +9,7 @@ export default (props) => {
   return (
     <div className='menu'>
       <h1>Hackable Mi!</h1>
-      <p>...</p>
+      <p>Guide Mi through timeless code and bugs</p>
       <div className='mainMenu'>
         <ul className='menuOptions'>
           <li>How to play</li>

@@ -9,6 +9,8 @@ gulp.task('copy-assets', function() {
   return gulp.src('src/static/**').pipe(gulp.dest('public'));
 });
 
+gulp.task('grammar', shell.task(['node node_modules/.bin/jacob -t src/game/system/mis/grammar/tokens.jacoblex -l src/game/system/mis/lexer.js']));
+
 gulp.task("webpack:build", function(callback) {
   return webpack(webpackConfig, function(err, stats) {
     if (err) {
@@ -61,8 +63,8 @@ gulp.task('default', function() {
 
 gulp.task('build', ['webpack:build', 'copy-assets']);
 
-gulp.task('watch', ['copy-assets', 'webpack-dev-server'], function() {
-  return gulp.watch(['assets/**'], ['copy-assets']);
+gulp.task('watch', ['copy-assets', 'grammar', 'webpack-dev-server'], function() {
+  return gulp.watch(['assets/**', 'src/game/system/mis/grammar/**'], ['copy-assets', 'grammar']);
 });
 
 gulp.task('test', shell.task(['./node_modules/.bin/mocha']));

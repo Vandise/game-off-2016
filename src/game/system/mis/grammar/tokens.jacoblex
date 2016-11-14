@@ -1,0 +1,22 @@
+%moduleName MisLexer
+
+%%
+digits = [0-9]
+%%
+
+<>{digits}+   {
+    this.jjval = parseInt(this.jjtext);
+    return 'T_INTEGER';
+}
+
+<>\"[^"]*\" {
+  this.jjval = this.jjtext;
+  return 'T_STRING'; 
+}
+
+<>\w+ {
+  this.jjval = this.jjtext;
+  return 'T_IDENTIFIER';
+}
+
+<>$   { return 'EOF'; }

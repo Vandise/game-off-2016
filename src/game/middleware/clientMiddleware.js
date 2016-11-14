@@ -1,4 +1,5 @@
 import * as types from '../constants/actions';
+import SystemDiver from '../system/driver';
 
 export const clientMiddleware = () => {
   return store => next => action => {
