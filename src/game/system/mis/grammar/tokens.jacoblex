@@ -4,7 +4,7 @@
 digits = [0-9]
 %%
 
-<>\n {
+<>\n+ {
   return 'T_TERMINATOR';
 }
 

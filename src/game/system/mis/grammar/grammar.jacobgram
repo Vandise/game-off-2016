@@ -6,8 +6,6 @@
 %left 'T_GT' 'T_GE' 'T_LT' 'T_LE'
 %left 'T_COLONEQUAL' 'T_NOT_EQUAL'
 
-Program = { Expressions } function(expressions){ return expressions; };
-
 Expressions = 
     Expression function(expression) {
       return new imports.ast.BranchNode([expression]);
@@ -16,16 +14,16 @@ Expressions =
       expressions.pushNode(expression);
       return expressions;
     }
-  /*
-  | Expressions Terminator function(exp, _) {
-      console.log('Single expression');
+  | Expressions Terminator function(expressions, _) {
+      return expressions;
     }
-  */
   ;
 
 Expression =
     Literal
   | SetLocal
+  | GetLocal
+  | Loop
   ;
 
 Literal =
@@ -40,6 +38,20 @@ Literal =
 SetLocal =
     'T_IDENTIFIER' 'T_COLONEQUAL' Expression function(variable, _, expression) {
       return new imports.ast.AssignmentNode(variable, expression);
+    }
+  ;
+
+GetLocal =
+    'T_IDENTIFIER' function(local) {
+      return new imports.ast.GetLocalNode(local);
+    }
+  ;
+
+Loop =
+    'T_LOOP' Terminator
+      Expressions Terminator
+    'T_UNTIL' Expression function(loop, terminator, expressions, until, condition) {
+      return new imports.ast.LoopNode(expressions, condition);
     }
   ;
 

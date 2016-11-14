@@ -36,9 +36,7 @@ export default class SystemDriver {
       console.log(ast);
 
       if (ast != null) {
-        ast.forEach((node) => {
-          node.compile(this.store, addConsoleMessage);
-        });
+        ast.compile(this.store, addConsoleMessage);
       }
       return true;
     }
