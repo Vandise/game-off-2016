@@ -10,6 +10,7 @@ export default class extends Phaser.Game {
     this.playerInventory = {};
     this.isInitialized = false;
     this.state.add('MainMenu', MainMenu, false);
+    this.dispatch = dispatch;
   }
 
   initialize() {

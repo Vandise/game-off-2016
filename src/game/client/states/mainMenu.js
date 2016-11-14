@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { setMenu } from '../../actions/menuActions';
 
 export default class extends Phaser.State {
 
@@ -12,6 +13,7 @@ export default class extends Phaser.State {
   }
 
   create() {
+    this.game.dispatch(setMenu('mainMenu', true));
     return true;    
   }
 

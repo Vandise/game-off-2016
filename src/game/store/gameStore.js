@@ -5,7 +5,9 @@ import ClientMiddleware from '../middleware/clientMiddleware';
 
 const initialState = {
   client: null,
-  menu: {},
+  menu: {
+    mainMenu: { open: false },
+  },
 };
 
 const reducers = combineReducers(Reducers);

@@ -5,7 +5,8 @@ import { initializeClient } from '../actions/clientActions';
 export function gameHandler({ dispatch, client }) {
   if (client != null && !client.isInitialized) {
     client.initialize();
-  } else {
+  }
+  if (client === null) {
     dispatch(initializeClient(dispatch));
   }
   return null;
