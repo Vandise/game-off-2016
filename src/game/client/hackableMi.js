@@ -9,7 +9,8 @@ export default class extends Phaser.Game {
 
   constructor(dispatch, container = 'gameContainer', width = 960, height = 600) {
     super(width, height, Phaser.AUTO, container, null);
-    this.playerInventory = {};
+    this.playerInventory = null;
+    this.player = null;
     this.isInitialized = false;
     this.state.add('MainMenu', MainMenu, false);
     this.state.add('Playground', Playground, false);

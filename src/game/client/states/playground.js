@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import Player from '../objects/player';
 import { setMenu } from '../../actions/menuActions';
 
 export default class extends Phaser.State {
@@ -21,6 +22,13 @@ export default class extends Phaser.State {
     // - load command (Mi script terminal)
     // - load command console
     // - show player inventory (1 item)
+    this.game.physics.startSystem(Phaser.Physics.ARCADE);
+
+    this.game.player = new Player(this.game).load();
+    // testing animations for fun
+    //this.game.player.animations.play('walk_up');
+    //this.game.player.move_up();
+
     this.game.dispatch(setMenu('codeMenu', true));
     this.game.dispatch(setMenu('consoleMenu', true));
     this.game.dispatch(setMenu('playerMenu', true));
