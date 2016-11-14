@@ -1,5 +1,7 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import Reducers from '../reducers/index';
+import ClientMiddleware from '../middleware/clientMiddleware';
 
 const initialState = {
   client: null,
@@ -8,7 +10,9 @@ const initialState = {
 const reducers = combineReducers(Reducers);
 
 export default (state = initialState) => {
-  const store = createStore(reducers, state);
+  const store = createStore(reducers, state,
+    applyMiddleware(thunk, ClientMiddleware())
+  );
   store.subscribe(() => {
     
   });
