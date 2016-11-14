@@ -15,7 +15,6 @@ export default class extends Phaser.Game {
   initialize() {
     this.isInitialized = true;
     this.state.start('MainMenu');
-    console.log(this.state);
   }
 
 }

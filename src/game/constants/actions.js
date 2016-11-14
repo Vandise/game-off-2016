@@ -1,1 +1,2 @@
 export const INITIALIZE_CLIENT = 'INITALIZE_CLIENT';
+export const TOGGLE_MENU = 'TOGGLE_MENU';
