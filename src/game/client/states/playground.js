@@ -13,6 +13,7 @@ export default class extends Phaser.State {
   }
 
   create() {
+    this.game.time.advancedTiming = true;
     // Lots of stuff to do here!
     // - Initialize player
     // - load command (Mi script terminal)
@@ -24,6 +25,10 @@ export default class extends Phaser.State {
     this.game.music = this.add.audio('dungeon_music');
     this.game.music.play();
     return true;
+  }
+
+  render() {
+    this.game.debug.text(this.game.time.fps, 2, 14, "#00ff00");    
   }
 
   update() {

@@ -10,7 +10,13 @@ export default (props) => {
         <h3>Player</h3>
       </div>
       <div className='data'>
-        
+        <div className='itemContainer'>
+          <div className='sectionLabel'>Inventory</div>
+          <div className='itemSlot'></div>
+        </div>
+        <div className='gameData'>
+          <div className='sectionLabel'>Metrics</div>
+        </div>
       </div>
     </div>
   );
