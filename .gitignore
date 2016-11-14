@@ -4,3 +4,4 @@ node_modules
 *.log
 public/
 .nyc_output/
+src/game/system/mis/lexer.js
