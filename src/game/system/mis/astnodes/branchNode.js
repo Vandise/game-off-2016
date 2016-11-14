@@ -12,9 +12,10 @@ export default class BranchNode {
     this.nodes = this.nodes.concat(nodes);    
   }
 
-  compile() {
+  compile(store, console) {
+    store.dispatch(console(`Compiling AST Branch: ${this.nodes.length} nodes`));
     this.nodes.forEach((node) => {
-      node.compile();
+      node.compile(store, console);
     });
   }
 

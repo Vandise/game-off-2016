@@ -6,14 +6,15 @@
 %left 'T_GT' 'T_GE' 'T_LT' 'T_LE'
 %left 'T_COLONEQUAL' 'T_NOT_EQUAL'
 
-Program = { Expressions } function(expressions){ console.log('AST generated'); };
+Program = { Expressions } function(expressions){ return expressions; };
 
 Expressions = 
-    Expression function(exp) {
-      console.log('Expression');
+    Expression function(expression) {
+      return new imports.ast.BranchNode([expression]);
     }
-  | Expressions Terminator Expression function(expressions, _, exp) {
-      console.log('Expressions Terminator Expression');    
+  | Expressions Terminator Expression function(expressions, _, expression) {
+      expressions.pushNode(expression);
+      return expressions;
     }
   /*
   | Expressions Terminator function(exp, _) {
@@ -28,10 +29,10 @@ Expression =
 
 Literal =
     'T_STRING' function(string) {
-      console.log('Found string', string);
+      return new imports.ast.LiteralNode(string);
     }
   | 'T_INTEGER' function(integer) {
-      console.log('Found integer', integer);
+      return new imports.ast.LiteralNode(integer);
     }
   ;
 

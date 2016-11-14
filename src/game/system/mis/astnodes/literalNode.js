@@ -4,7 +4,8 @@ export default class LiteralNode {
     this.value = value;
   }
 
-  compile() {
+  compile(store, console) {
+    store.dispatch(console(`Compiling literal value: ${this.value}`));
     return this.value;   
   }
 

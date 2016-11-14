@@ -3,6 +3,7 @@ import { addConsoleMessage } from '../actions/consoleActions';
 
 const Lexer = require(`./${SYSTEM_LANGUAGE}/lexer`);
 const Parser = require(`./${SYSTEM_LANGUAGE}/parser`);
+const nodes = require(`./${SYSTEM_LANGUAGE}/astnodes/index`).default;
 
 export default class SystemDriver {
 
@@ -16,14 +17,28 @@ export default class SystemDriver {
       const context = {
         variables: {},
       };
-      console.log(this.codeText);
+
+      let ast = null;
       const lexer = new Lexer();
-      const parser = new Parser();
+      const parser = new Parser({
+        ast: nodes,
+      });
+
       lexer.setInput(this.codeText);
+
       try {
-        parser.parse(lexer);
+        ast = parser.parse(lexer);
       } catch(e) {
         this.store.dispatch(addConsoleMessage(e.message));
+      }
+
+      console.log(this.codeText);
+      console.log(ast);
+
+      if (ast != null) {
+        ast.forEach((node) => {
+          node.compile(this.store, addConsoleMessage);
+        });
       }
       return true;
     }

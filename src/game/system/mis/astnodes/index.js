@@ -1,5 +1,5 @@
 import LiteralNode from './literalNode';
-import BranchNode form './branchNode';
+import BranchNode from './branchNode';
 
 export default {
   LiteralNode,
