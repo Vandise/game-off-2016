@@ -25,6 +25,7 @@ Expressions =
 
 Expression =
     Literal
+  | SetLocal
   ;
 
 Literal =
@@ -33,6 +34,12 @@ Literal =
     }
   | 'T_INTEGER' function(integer) {
       return new imports.ast.LiteralNode(integer);
+    }
+  ;
+
+SetLocal =
+    'T_IDENTIFIER' 'T_COLONEQUAL' Expression function(variable, _, expression) {
+      return new imports.ast.AssignmentNode(variable, expression);
     }
   ;
 
