@@ -4,7 +4,7 @@
 digits = [0-9]
 %%
 
-<>\n+ {
+<>\n {
   return 'T_TERMINATOR';
 }
 
@@ -115,8 +115,6 @@ digits = [0-9]
   return 'T_IDENTIFIER';
 }
 
-<>\s* { }
+<>\s+ {  }
 
-<>.   { return this.jjtext; }
-
-<>$   { return 'T_EOF'; }
+<>$   { console.log('end of file'); return 'T_EOF'; }

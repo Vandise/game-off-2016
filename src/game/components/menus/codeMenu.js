@@ -15,13 +15,20 @@ export default class extends React.Component {
 
   handleTabs(e) {
     const tabKey = 9;
-    if (e.keyCode === tabKey) {
+    const returnKey = 13;
+    if (e.keyCode === tabKey || e.keyCode === returnKey) {
+      let content = "\n";
+      let offset = 1;
+      if (e.keyCode === tabKey) {
+        content = "  ";
+        offset = 2;
+      }
       const reference = this.refs.miCode;
       let val = reference.value,
           start = reference.selectionStart,
           end = reference.selectionEnd;
-      this.refs.miCode.value = val.substring(0, start) + '  ' + val.substring(end);
-      this.refs.miCode.selectionStart = this.refs.miCode.selectionEnd = start + 2;
+      this.refs.miCode.value = val.substring(0, start) + content + val.substring(end);
+      this.refs.miCode.selectionStart = this.refs.miCode.selectionEnd = start + offset;
       e.preventDefault();
       return false;
     }

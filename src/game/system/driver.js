@@ -24,7 +24,13 @@ export default class SystemDriver {
         ast: nodes,
       });
 
-      lexer.setInput(this.codeText);
+      let code = "";
+      const data = this.codeText.split('\n');     // there's a bug in the parser with whitespace.
+      data.forEach((line) => {
+        code += line.replace(/^[ ]+|[ ]+$/g,'');
+        code += "\n";        
+      });
+      lexer.setInput(code);
 
       try {
         ast = parser.parse(lexer);
@@ -32,7 +38,7 @@ export default class SystemDriver {
         this.store.dispatch(addConsoleMessage(e.message));
       }
 
-      console.log(this.codeText);
+      console.log(code);
       console.log(ast);
 
       if (ast != null) {

@@ -6,6 +6,12 @@
 %left 'T_GT' 'T_GE' 'T_LT' 'T_LE'
 %left 'T_COLONEQUAL' 'T_NOT_EQUAL'
 
+Root =
+    Expressions function(expressions) {
+      return expressions;      
+    }
+  ;
+
 Expressions = 
     Expression function(expression) {
       return new imports.ast.BranchNode([expression]);
@@ -48,9 +54,9 @@ GetLocal =
   ;
 
 Loop =
-    'T_LOOP' Terminator
-      Expressions Terminator
-    'T_UNTIL' Expression function(loop, terminator, expressions, until, condition) {
+    'T_LOOP' 'T_DO' Terminator
+      Expressions
+    'T_UNTIL' Expression function(loop, _, terminator, expressions, until, condition) {
       return new imports.ast.LoopNode(expressions, condition);
     }
   ;
