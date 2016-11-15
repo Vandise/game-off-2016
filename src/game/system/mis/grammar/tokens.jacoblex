@@ -106,7 +106,7 @@ digits = [0-9]
 }
 
 <>\"[^"]*\" {
-  this.jjval = this.jjtext;
+  this.jjval = this.jjtext.substring(1, this.jjtext.length-1);
   return 'T_STRING'; 
 }
 

@@ -7,6 +7,8 @@ export default class LoopNode {
 
   compile(store, console) {
     store.dispatch(console(`Compiling Loop Node`));
+    this.condition.compile(store, console);
+    this.expressions.compile(store, console);
   }
 
 }

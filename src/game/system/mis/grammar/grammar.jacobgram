@@ -30,6 +30,7 @@ Expression =
   | SetLocal
   | GetLocal
   | Loop
+  | If
   ;
 
 Literal =
@@ -58,6 +59,14 @@ Loop =
       Expressions
     'T_UNTIL' Expression function(loop, _, terminator, expressions, until, condition) {
       return new imports.ast.LoopNode(expressions, condition);
+    }
+  ;
+
+If =
+    'T_IF' Expression Terminator
+      Expressions
+    'T_END' function(tif, conditional, term, body, _) {
+      return new imports.ast.IfNode(conditional, body);
     }
   ;
 

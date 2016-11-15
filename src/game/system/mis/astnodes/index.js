@@ -3,6 +3,7 @@ import BranchNode from './branchNode';
 import AssignmentNode from './assignmentNode';
 import GetLocalNode from './getLocalNode';
 import LoopNode from './loopNode';
+import IfNode from './ifNode';
 
 export default {
   LiteralNode,
@@ -10,4 +11,5 @@ export default {
   AssignmentNode,
   GetLocalNode,
   LoopNode,
+  IfNode,
 };
