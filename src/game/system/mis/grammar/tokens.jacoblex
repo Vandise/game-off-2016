@@ -100,6 +100,10 @@ digits = [0-9]
   return 'T_CLOSE_PAREN';
 }
 
+<>, {
+  return 'T_COMMA';
+}
+
 <>{digits}+   {
     this.jjval = parseInt(this.jjtext);
     return 'T_INTEGER';

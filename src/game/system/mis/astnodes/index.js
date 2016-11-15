@@ -4,6 +4,7 @@ import AssignmentNode from './assignmentNode';
 import GetLocalNode from './getLocalNode';
 import LoopNode from './loopNode';
 import IfNode from './ifNode';
+import CallNode from './callNode';
 
 export default {
   LiteralNode,
@@ -12,4 +13,5 @@ export default {
   GetLocalNode,
   LoopNode,
   IfNode,
+  CallNode,
 };

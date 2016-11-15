@@ -31,6 +31,7 @@ Expression =
   | GetLocal
   | Loop
   | If
+  | Call
   ;
 
 Literal =
@@ -68,6 +69,23 @@ If =
     'T_END' function(tif, conditional, term, body, _) {
       return new imports.ast.IfNode(conditional, body);
     }
+  ;
+
+Call =
+    'T_IDENTIFIER' 'T_OPEN_PAREN' Arguments 'T_CLOSE_PAREN' function(name, p1, args, p2) {
+      return new imports.ast.CallNode(name, args);
+    }
+  ;
+
+Arguments =
+    Expression function(expression) {
+      return [expression];
+    }
+  | Arguments 'T_COMMA' Expression function(args, _, expression) {
+      args.push(expression);
+      return args;
+    }
+  | function(){ return []; }
   ;
 
 Terminator =
