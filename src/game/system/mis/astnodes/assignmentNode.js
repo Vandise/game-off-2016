@@ -5,8 +5,8 @@ export default class AssignmentNode {
     this.expression = expression;
   }
 
-  compile(store, console) {
-    store.dispatch(console(`Compiling Assignment Node: ${this.variable}`));
+  compile(store, console, context) {
+    //store.dispatch(console(`Compiling Assignment Node: ${this.variable}`));
     this.expression.compile(store, console);
   }
 

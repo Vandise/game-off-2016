@@ -4,6 +4,7 @@ import { addConsoleMessage } from '../actions/consoleActions';
 const Lexer = require(`./${SYSTEM_LANGUAGE}/lexer`);
 const Parser = require(`./${SYSTEM_LANGUAGE}/parser`);
 const nodes = require(`./${SYSTEM_LANGUAGE}/astnodes/index`).default;
+const Runtime = require(`./${SYSTEM_LANGUAGE}/runtime/index`).default;
 
 export default class SystemDriver {
 
@@ -14,10 +15,6 @@ export default class SystemDriver {
 
   compile() {
     if (this.codeText != null && this.codeText.length > 0) {
-      const context = {
-        variables: {},
-      };
-
       let ast = null;
       const lexer = new Lexer();
       const parser = new Parser({
@@ -38,13 +35,13 @@ export default class SystemDriver {
         this.store.dispatch(addConsoleMessage(e.message));
       }
 
-      console.log(code);
-      console.log(ast);
+      console.debug(code);
 
-      if (ast != null) {
-        ast.compile(this.store, addConsoleMessage);
+      try {      
+        (new Runtime(ast, this.store, addConsoleMessage).execute());
+      } catch(e) {
+        this.store.dispatch(addConsoleMessage(e.message));
       }
-      return true;
     }
     return false;    
   }

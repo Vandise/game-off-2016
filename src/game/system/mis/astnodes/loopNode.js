@@ -5,10 +5,10 @@ export default class LoopNode {
     this.condition = condition;
   }
 
-  compile(store, console) {
-    store.dispatch(console(`Compiling Loop Node`));
-    this.condition.compile(store, console);
-    this.expressions.compile(store, console);
+  compile(store, console, context) {
+    //store.dispatch(console(`Compiling Loop Node`));
+    this.condition.compile(store, console, context);
+    this.expressions.compile(store, console, context);
   }
 
 }

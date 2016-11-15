@@ -4,8 +4,8 @@ export default class GetLocalNode {
     this.variable = variable;
   }
 
-  compile(store, console) {
-    store.dispatch(console(`Compiling GetLocal Node: ${this.variable}`));
+  compile(store, console, context) {
+    //store.dispatch(console(`Compiling GetLocal Node: ${this.variable}`));
   }
 
 }
