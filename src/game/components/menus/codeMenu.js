@@ -43,6 +43,8 @@ export default class extends React.Component {
     this.refs.miCode.value = '';
   }
 
+  // TODO: disable runCode while currently still running
+  //       this would be enabled once the exe finishes
   render() {
     return (
       <div className='codeMenu'>

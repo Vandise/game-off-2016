@@ -15,9 +15,9 @@ class Player extends Phaser.Sprite {
     this.game.physics.arcade.enable(this);
     this.body.collideWorldBounds = true;
     this.anchor.set(0.5);
-    this.animations.add('walk_up', [0, 1, 2], ANIMATION_SPEED, true);
+    this.animations.add('walk_down', [0, 1, 2], ANIMATION_SPEED, true);
     this.animations.add('walk_right', [3, 4, 5], ANIMATION_SPEED, true);
-    this.animations.add('walk_down', [6, 7, 8], ANIMATION_SPEED, true);
+    this.animations.add('walk_up', [6, 7, 8], ANIMATION_SPEED, true);
     this.animations.add('walk_left', [9, 10, 11], ANIMATION_SPEED, true);
     return this;    
   }
@@ -31,8 +31,10 @@ class Player extends Phaser.Sprite {
         return this.move_right(distance);
         break;
       case 'up':
+        return this.move_up(distance);
         break;
       case 'down':
+        return this.move_down(distance);
         break;
     }
     return false;
@@ -57,9 +59,11 @@ class Player extends Phaser.Sprite {
       this.game.dispatch(addConsoleMessage(
         `Player moved: left, Distance: ${distance}`
       ));
+      this.animations.play('walk_left');
       let moveDistance = 0;
       const movement = setInterval(() => {
         if (moveDistance >= (40 * distance)) {
+          this.animations.stop(DEFAULT_FRAME, true);
           clearInterval(movement);
           resolve('Animation Complete');
           return true;
@@ -73,11 +77,13 @@ class Player extends Phaser.Sprite {
   move_right(distance) {
     return new Promise((resolve, reject) => {
       this.game.dispatch(addConsoleMessage(
-        `Player moved: left, Distance: ${distance}`
+        `Player moved: right, Distance: ${distance}`
       ));
       let moveDistance = 0;
+      this.animations.play('walk_right');
       const movement = setInterval(() => {
         if (moveDistance >= (40 * distance)) {
+          this.animations.stop(DEFAULT_FRAME, true);
           clearInterval(movement);
           resolve('Animation Complete');
           return true;
@@ -102,6 +108,45 @@ class Player extends Phaser.Sprite {
     */
   }
 
+  move_up(distance) {
+    return new Promise((resolve, reject) => {
+      this.game.dispatch(addConsoleMessage(
+        `Player moved: up, Distance: ${distance}`
+      ));
+      let moveDistance = 0;
+      this.animations.play('walk_up');
+      const movement = setInterval(() => {
+        if (moveDistance >= (40 * distance)) {
+          this.animations.stop(DEFAULT_FRAME, true);
+          clearInterval(movement);
+          resolve('Animation Complete');
+          return true;
+        }
+        this.y += 4;
+        moveDistance += 4;
+      }, 75);
+    });
+  }
+
+  move_down(distance) {
+    return new Promise((resolve, reject) => {
+      this.game.dispatch(addConsoleMessage(
+        `Player moved: down, Distance: ${distance}`
+      ));
+      let moveDistance = 0;
+      this.animations.play('walk_down');
+      const movement = setInterval(() => {
+        if (moveDistance >= (40 * distance)) {
+          this.animations.stop(DEFAULT_FRAME, true);
+          clearInterval(movement);
+          resolve('Animation Complete');
+          return true;
+        }
+        this.y -= 4;
+        moveDistance += 4;
+      }, 75);
+    });
+  }
 }
 
 export default Player;
