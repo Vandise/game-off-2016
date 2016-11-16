@@ -1,4 +1,4 @@
-import { EXECUTE_CODE } from '../constants/actions';
+import { EXECUTE_CODE, TERMINATE_CODE } from '../constants/actions';
 
 export function executeCode(code) {
   return {
@@ -6,5 +6,12 @@ export function executeCode(code) {
     payload: {
       code,
     }
+  };
+};
+
+export function terminateCode() {
+  return {
+    type: TERMINATE_CODE,
+    payload: false,
   };
 };

@@ -10,6 +10,9 @@ export const clientMiddleware = () => {
       const driver = new SystemDriver(action.payload.code, store);
       driver.compile();
     }
+    if (action.type === types.TERMINATE_CODE) {
+      store.getState().client.systemTerminate();
+    }
     return next(action);
   };
 };

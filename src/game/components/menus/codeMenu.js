@@ -1,5 +1,5 @@
 import React from 'react';
-import { executeCode } from '../../actions/playerActions';
+import { executeCode, terminateCode } from '../../actions/playerActions';
 
 // eslint-disable-next-line no-unused-vars
 import Styles from '../../../stylesheets/menus/codeMenu';
@@ -11,6 +11,7 @@ export default class extends React.Component {
     this.handleTabs = this.handleTabs.bind(this);
     this.clearForm = this.clearForm.bind(this);
     this.runCode = this.runCode.bind(this);
+    this.terminateExecution = this.terminateExecution.bind(this);
   }
 
   handleTabs(e) {
@@ -43,6 +44,10 @@ export default class extends React.Component {
     this.refs.miCode.value = '';
   }
 
+  terminateExecution() {
+    this.props.dispatch(terminateCode());
+  }
+
   // TODO: disable runCode while currently still running
   //       this would be enabled once the exe finishes
   render() {
@@ -56,7 +61,7 @@ export default class extends React.Component {
         </div>
         <div className='codeFooter'>
           <span className='button' onClick={() => this.runCode() }>Run</span>
-          <span className='button'>Terminate</span>
+          <span className='button' onClick={() => this.terminateExecution() }>Terminate</span>
           <span className='button' onClick={() => this.clearForm() }>Clear</span>
         </div>
       </div>

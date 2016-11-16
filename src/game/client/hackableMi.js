@@ -16,6 +16,7 @@ export default class extends Phaser.Game {
     this.state.add('Playground', Playground, false);
     this.dispatch = dispatch;
     this.music = null;
+    this.terminated = false;
   }
 
   initialize() {
@@ -29,6 +30,18 @@ export default class extends Phaser.Game {
     }
     this.dispatch(closeAllMenus());
     this.state.start(state);
+  }
+
+  isTerminated() {
+    return this.terminated;
+  }
+
+  systemTerminate() {
+    this.terminated = true;
+  }
+
+  systemResume() {
+    this.terminated = false;
   }
 
 }
