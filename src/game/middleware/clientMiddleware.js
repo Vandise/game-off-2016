@@ -11,7 +11,7 @@ export const clientMiddleware = () => {
       driver.compile();
     }
     if (action.type === types.TERMINATE_CODE) {
-      store.getState().client.systemTerminate();
+      store.getState().client.systemTerminate(action.payload.status);
     }
     return next(action);
   };

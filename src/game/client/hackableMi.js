@@ -36,8 +36,8 @@ export default class extends Phaser.Game {
     return this.terminated;
   }
 
-  systemTerminate() {
-    this.terminated = true;
+  systemTerminate(status) {
+    this.terminated = status;
   }
 
   systemResume() {

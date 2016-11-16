@@ -9,9 +9,11 @@ export function executeCode(code) {
   };
 };
 
-export function terminateCode() {
+export function terminateCode(hault = true) {
   return {
     type: TERMINATE_CODE,
-    payload: false,
+    payload: {
+      status: hault,
+    },
   };
 };

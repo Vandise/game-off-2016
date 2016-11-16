@@ -37,6 +37,7 @@ export default class extends React.Component {
 
   runCode() {
     const code = this.refs.miCode.value;
+    this.props.dispatch(terminateCode(false));
     this.props.dispatch(executeCode(code));
   }
 
