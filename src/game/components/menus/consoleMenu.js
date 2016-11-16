@@ -5,6 +5,7 @@ import Styles from '../../../stylesheets/menus/consoleMenu';
 
 export default (props) => {
   const messages = props.console.messages;
+  messages.reverse();
   return (
     <div className='consoleMenu'>
       <div className='header'>
