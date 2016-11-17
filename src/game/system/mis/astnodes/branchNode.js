@@ -20,8 +20,10 @@ export default class BranchNode {
       (function loop(branch, store, console, context, index) {
         if (index < branch.nodes.length && !store.getState().client.isTerminated()) {
           const node = branch.nodes[index];
-          node.compile(store, console, context).then((result) => {
-            window.console.log('result', result);
+          const p = node.compile(store, console, context);
+          window.console.log('Branch node compiled node', node, p);
+          p.then((result) => {
+            window.console.log('Branch node result', result);
             loop(branch, store, console, context, index+1);
           }).catch((err) => {
             store.getState().client.systemTerminate(true);

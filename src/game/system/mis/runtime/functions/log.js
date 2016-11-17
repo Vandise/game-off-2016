@@ -10,4 +10,7 @@ export default (args, context, store, console) => {
     return ` ${value}`;
   });
   store.dispatch(console(`LOG: ${logmsg}`));
+  return new Promise((resolve, reject) => {
+    resolve('Log Message dispatched');
+  });
 };

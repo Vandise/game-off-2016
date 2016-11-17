@@ -11,7 +11,13 @@ export default class UntilNode {
         n.condition.compile(s, con, c).then((isComplete) => {
           if(!isComplete && i < 25) {
             n.expressions.compile(s, con, c).then((result) => {
-              loop(n, s, con, c, i + 1);
+              if (result && result.then) {
+                result.then(() => {
+                  loop(n, s, con, c, i + 1);
+                });                
+              } else {
+                loop(n, s, con, c, i + 1);
+              }
             });
           } else {
             resolve(isComplete);

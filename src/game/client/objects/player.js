@@ -41,36 +41,24 @@ class Player extends Phaser.Sprite {
   }
 
   move_left(distance) {
-    /*
-    return (function move(moveDistance, player) {
-      setTimeout(() => {
-        if (moveDistance >= (40 * distance)) {
-          console.log('Animation complete');
-          return true;
-        }
-        player.x -= 4;
-        moveDistance += 4;
-        move(moveDistance, player);
-      }, 75);
-      return true;
-    })(0, this);
-    */
     return new Promise((resolve, reject) => {
       this.game.dispatch(addConsoleMessage(
         `Player moved: left, Distance: ${distance}`
       ));
       this.animations.play('walk_left');
       let moveDistance = 0;
+      const computedDistance = distance > 1 ? (40 * distance) : ((40 * distance) - 4);
       const movement = setInterval(() => {
-        if (moveDistance >= (40 * distance)) {
+        if (moveDistance >= computedDistance) {
           this.animations.stop(DEFAULT_FRAME, true);
           clearInterval(movement);
-          resolve('Animation Complete');
-          return true;
+          setTimeout(() => {
+            resolve('Animation Complete');
+          }, 500);
         }
         this.x -= 4;
         moveDistance += 4;
-      }, 75);
+      }, 100);
     });
   }
 
@@ -80,32 +68,21 @@ class Player extends Phaser.Sprite {
         `Player moved: right, Distance: ${distance}`
       ));
       let moveDistance = 0;
+      const computedDistance = distance > 1 ? (40 * distance) : ((40 * distance) - 4);
       this.animations.play('walk_right');
       const movement = setInterval(() => {
-        if (moveDistance >= (40 * distance)) {
+        if (moveDistance >= computedDistance) {
           this.animations.stop(DEFAULT_FRAME, true);
           clearInterval(movement);
-          resolve('Animation Complete');
-          return true;
+          setTimeout(() => {
+            resolve('Animation Complete');
+          }, 500);
         }
         this.x += 4;
         moveDistance += 4;
-      }, 75);
+      }, 100);
     });
-    /*
-    this.game.dispatch(addConsoleMessage(
-      `Player moved: left, Distance: ${distance}`
-    ));
-    let moveDistance = 0;
-    const movement = setInterval(() => {
-      if (moveDistance >= (40 * distance)) {
-        clearInterval(movement);
-        return true;
-      }
-      this.x -= 4;
-      moveDistance += 4;
-    }, 75);
-    */
+
   }
 
   move_up(distance) {
@@ -114,17 +91,20 @@ class Player extends Phaser.Sprite {
         `Player moved: up, Distance: ${distance}`
       ));
       let moveDistance = 0;
+      const computedDistance = (40*distance);
       this.animations.play('walk_up');
       const movement = setInterval(() => {
-        if (moveDistance >= (40 * distance)) {
+        if (moveDistance >= computedDistance) {
           this.animations.stop(DEFAULT_FRAME, true);
           clearInterval(movement);
-          resolve('Animation Complete');
+          setTimeout(() => {
+            resolve('Animation Complete');
+          }, 500);
           return true;
         }
         this.y += 4;
         moveDistance += 4;
-      }, 75);
+      }, 100);
     });
   }
 
@@ -134,17 +114,20 @@ class Player extends Phaser.Sprite {
         `Player moved: down, Distance: ${distance}`
       ));
       let moveDistance = 0;
+      const computedDistance = (40*distance);
       this.animations.play('walk_down');
       const movement = setInterval(() => {
-        if (moveDistance >= (40 * distance)) {
+        if (moveDistance >= computedDistance) {
           this.animations.stop(DEFAULT_FRAME, true);
           clearInterval(movement);
-          resolve('Animation Complete');
+          setTimeout(() => {
+            resolve('Animation Complete');
+          }, 500);
           return true;
         }
         this.y -= 4;
         moveDistance += 4;
-      }, 75);
+      }, 100);
     });
   }
 }

@@ -17,9 +17,10 @@ export default class CallNode {
     return Promise.all(params).then((args) => {
       if (context.functions[this.name]) {
         return context.functions[this.name](args, context, store, console);
+      } else {
+        store.dispatch(console(`Call to undefined function ${this.name}`));
+        throw UndefinedFunction();
       }
-      store.dispatch(console(`Call to undefined function ${this.name}`));
-      throw UndefinedFunction();
     });
   }
 
