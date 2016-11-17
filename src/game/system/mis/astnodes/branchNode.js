@@ -23,7 +23,6 @@ export default class BranchNode {
           const p = node.compile(store, console, context);
           window.console.log('Branch node compiled node', node, p);
           p.then((result) => {
-            window.console.log('Branch node result', result);
             if (index === branch.nodes.length - 1) {
               resolve(branch);
             } else {
@@ -37,7 +36,6 @@ export default class BranchNode {
         if (store.getState().client.isTerminated()) {
           store.dispatch(console('System Terminated by user'));
         }
-        //resolve(branch);
       })(this, store, console, context, 0);
     });
   }

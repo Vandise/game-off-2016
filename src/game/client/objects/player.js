@@ -19,7 +19,15 @@ class Player extends Phaser.Sprite {
     this.animations.add('walk_right', [3, 4, 5], ANIMATION_SPEED, true);
     this.animations.add('walk_up', [6, 7, 8], ANIMATION_SPEED, true);
     this.animations.add('walk_left', [9, 10, 11], ANIMATION_SPEED, true);
+    //window.player = for debugging coordinates and hackery moving from the browser
     return this;    
+  }
+
+  getCoordinates() {
+    return {
+      x: this.x,
+      y: this.y,
+    };
   }
 
   move(direction, distance = 1) {
@@ -47,17 +55,18 @@ class Player extends Phaser.Sprite {
       ));
       this.animations.play('walk_left');
       let moveDistance = 0;
-      const computedDistance = distance > 1 ? (40 * distance) : ((40 * distance) - 4);
+      const computedDistance = distance > 1 ? (40 * distance) : ((40 * distance));
       const movement = setInterval(() => {
+        console.log('Player coords:', this.x, this.y);
         if (moveDistance >= computedDistance) {
           this.animations.stop(DEFAULT_FRAME, true);
           clearInterval(movement);
-          setTimeout(() => {
-            resolve('Animation Complete');
-          }, 500);
+          resolve('Animation Complete');
+          console.log('Final coords:', this.x, this.y);
+        } else {
+          this.x -= 4;
+          moveDistance += 4;
         }
-        this.x -= 4;
-        moveDistance += 4;
       }, 100);
     });
   }
@@ -68,18 +77,19 @@ class Player extends Phaser.Sprite {
         `Player moved: right, Distance: ${distance}`
       ));
       let moveDistance = 0;
-      const computedDistance = distance > 1 ? (40 * distance) : ((40 * distance) - 4);
+      const computedDistance = distance > 1 ? (40 * distance) : ((40 * distance));
       this.animations.play('walk_right');
       const movement = setInterval(() => {
+        console.log('Player coords:', this.x, this.y);
         if (moveDistance >= computedDistance) {
           this.animations.stop(DEFAULT_FRAME, true);
           clearInterval(movement);
-          setTimeout(() => {
-            resolve('Animation Complete');
-          }, 500);
+          resolve('Animation Complete');
+          console.log('Final coords:', this.x, this.y);
+        } else {
+          this.x += 4;
+          moveDistance += 4;
         }
-        this.x += 4;
-        moveDistance += 4;
       }, 100);
     });
 
@@ -94,16 +104,16 @@ class Player extends Phaser.Sprite {
       const computedDistance = (40*distance);
       this.animations.play('walk_up');
       const movement = setInterval(() => {
+        console.log('Player coords:', this.x, this.y);
         if (moveDistance >= computedDistance) {
           this.animations.stop(DEFAULT_FRAME, true);
           clearInterval(movement);
-          setTimeout(() => {
-            resolve('Animation Complete');
-          }, 500);
-          return true;
+          resolve('Animation Complete');
+          console.log('Final coords:', this.x, this.y);
+        } else {
+          this.y += 4;
+          moveDistance += 4;
         }
-        this.y += 4;
-        moveDistance += 4;
       }, 100);
     });
   }
@@ -117,16 +127,16 @@ class Player extends Phaser.Sprite {
       const computedDistance = (40*distance);
       this.animations.play('walk_down');
       const movement = setInterval(() => {
+        console.log('Player coords:', this.x, this.y);
         if (moveDistance >= computedDistance) {
           this.animations.stop(DEFAULT_FRAME, true);
           clearInterval(movement);
-          setTimeout(() => {
-            resolve('Animation Complete');
-          }, 500);
-          return true;
+          resolve('Animation Complete');
+          console.log('Final coords:', this.x, this.y);
+        } else {
+          this.y -= 4;
+          moveDistance += 4;
         }
-        this.y -= 4;
-        moveDistance += 4;
       }, 100);
     });
   }
