@@ -24,7 +24,11 @@ export default class BranchNode {
           window.console.log('Branch node compiled node', node, p);
           p.then((result) => {
             window.console.log('Branch node result', result);
-            loop(branch, store, console, context, index+1);
+            if (index === branch.nodes.length - 1) {
+              resolve(branch);
+            } else {
+              loop(branch, store, console, context, index+1);
+            }
           }).catch((err) => {
             store.getState().client.systemTerminate(true);
             store.dispatch(console(`${err.name}: ${err.message}`));
@@ -33,7 +37,7 @@ export default class BranchNode {
         if (store.getState().client.isTerminated()) {
           store.dispatch(console('System Terminated by user'));
         }
-        resolve(branch);
+        //resolve(branch);
       })(this, store, console, context, 0);
     });
   }
