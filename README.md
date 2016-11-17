@@ -6,7 +6,7 @@ Guide Mi through an array of puzzles and mazes with code.
 - The UI
 - MiS(ript) Basics
 - Your First Puzzle
-- MiS(ript) Reference
+- [MiS(ript) Reference](https://github.com/Vandise/game-off-2016/blob/hackablemi/guide/mis_reference.md)
 - Contributing / Bug Report
 - Feature Development
 
