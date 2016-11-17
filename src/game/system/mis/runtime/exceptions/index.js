@@ -11,3 +11,10 @@ export const InvalidParameters = (message) => {
     message,
   };
 };
+
+export const UndefinedVariable = (variableName) => {
+  return {
+    name: "Undefined Variable",
+    message: `Variable ${variableName} is undefined`
+  };
+};

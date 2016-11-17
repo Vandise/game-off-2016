@@ -20,7 +20,11 @@ export default class BranchNode {
       if (nodes.length != 0 && !store.getState().client.isTerminated()) {
         const node = nodes.shift();
         node.compile(store, console, context).then((result) => {
+          window.console.log('result', result);
           loop(nodes, store, console, context, index+1);
+        }).catch((err) => {
+          store.getState().client.systemTerminate(true);
+          store.dispatch(console(`${err.name}: ${err.message}`));
         });
       }
       if (store.getState().client.isTerminated()) {
