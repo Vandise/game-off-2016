@@ -6,7 +6,9 @@ export default class LiteralNode {
 
   compile(store, console, context) {
     //store.dispatch(console(`Compiling literal value: ${this.value}`));
-    return this.value;
+    return new Promise((resolve, reject) => {
+      resolve(this.value);
+    });
   }
 
 }

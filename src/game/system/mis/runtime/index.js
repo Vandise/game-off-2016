@@ -16,6 +16,7 @@ export default class Runtime {
     if (this.ast != null) {
       this.ast.compile(this.store, this.addConsoleMessage, context);
     }
+    console.log('End Context', context);
   }
 
 }

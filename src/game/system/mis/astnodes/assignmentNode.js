@@ -7,7 +7,12 @@ export default class AssignmentNode {
 
   compile(store, console, context) {
     //store.dispatch(console(`Compiling Assignment Node: ${this.variable}`));
-    this.expression.compile(store, console);
+    return this.expression.compile(store, console).then((expval) => {
+      return new Promise((resolve, reject) => {
+        context.variables[this.variable] = expval;
+        resolve('Assignment Compiled');
+      });
+    });
   }
 
 }
