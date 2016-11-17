@@ -62,22 +62,22 @@ Conditionals =
 
 Maths =
     Expression 'T_PLUS' Expression function(val1, op, val2) {
-      return new imports.ast.LiteralNode(val1.value + val2.value);
+      return new imports.ast.OperatorNode(val1, op, val2);
     }
   | Expression 'T_MINUS' Expression function(val1, op, val2) {
-      return new imports.ast.LiteralNode(val1.value - val2.value);
+      return new imports.ast.OperatorNode(val1, op, val2);
     }
   | Expression 'T_MULTIPLY' Expression function(val1, op, val2) {
-      return new imports.ast.LiteralNode(val1.value * val2.value);
+      return new imports.ast.OperatorNode(val1, op, val2);
     }
   | Expression 'T_DIVIDE' Expression function(val1, op, val2) {
-      return new imports.ast.LiteralNode(val1.value / val2.value);
+      return new imports.ast.OperatorNode(val1, op, val2);
     }
   | Expression 'T_MODULO' Expression function(val1, op, val2) {
-      return new imports.ast.LiteralNode(val1.value % val2.value);
+      return new imports.ast.OperatorNode(val1, op, val2);
     }
   | Expression 'T_CARROT' Expression function(val1, op, val2) {
-      return new imports.ast.LiteralNode(Math.pow(val1.value, val2.value));
+      return new imports.ast.OperatorNode(val1, op, val2);
     }
   ;
 

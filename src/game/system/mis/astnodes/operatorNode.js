@@ -1,4 +1,4 @@
-export default class ConditionNode {
+export default class OperatorNode {
 
   constructor(exp1, op, exp2) {
     this.exp1 = exp1;
@@ -12,28 +12,28 @@ export default class ConditionNode {
       const right = this.exp2.compile(store, console, context);
       left.then((leftVal) => {
         right.then((rightVal) => {
-          let result = false;
+          let result = 0;
           switch(this.op){
-            case '>':
-              result = leftVal > rightVal;
+            case '+':
+              result = leftVal + rightVal;
               break;
-            case '<':
-              result = leftVal < rightVal;
+            case '-':
+              result = leftVal - rightVal;
               break;
-            case '>=':
-              result = leftVal >= rightVal;
+            case '*':
+              result = leftVal * rightVal;
               break;
-            case '<=':
-              result = leftVal <= rightVal;
+            case '/':
+              result = leftVal / rightVal;
               break;
-            case '=':
-              result = leftVal == rightVal;
+            case '%':
+              result = leftVal % rightVal;
               break;
-            case '!=':
-              result = leftVal != rightVal;
+            case '^':
+              result = Math.pow(leftVal, rightVal);
               break;
           }
-          resolve(result);
+          resolve(Math.round(result));
         });
       });
     });

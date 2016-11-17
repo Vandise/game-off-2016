@@ -6,6 +6,7 @@ import UntilNode from './untilNode';
 import IfNode from './ifNode';
 import CallNode from './callNode';
 import ConditionNode from './conditionNode';
+import OperatorNode from './OperatorNode';
 
 export default {
   LiteralNode,
@@ -16,4 +17,5 @@ export default {
   IfNode,
   CallNode,
   ConditionNode,
+  OperatorNode
 };

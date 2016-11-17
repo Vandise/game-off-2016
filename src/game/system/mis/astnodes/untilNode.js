@@ -5,21 +5,16 @@ export default class UntilNode {
     this.condition = condition;
   }
 
-  //
-  // TODO: fix grammar to compile to getlocal
-  //
   compile(store, console, context) {
     return new Promise((resolve, reject) => {
-      (function loop(node, store, console, context, index){
-        const condition = node.condition.compile(store, console, context);
-        const expressions = node.expressions.compile(store, console, context);
-        condition.then((isComplete) => {
-          if (!isComplete && index < 25) {
-            expressions.then((result) => {
-              loop(node, store, console, context, index+1);
+      (function loop(n, s, con, c, i) {
+        n.condition.compile(s, con, c).then((isComplete) => {
+          if(!isComplete && i < 25) {
+            n.expressions.compile(s, con, c).then((result) => {
+              loop(n, s, con, c, i + 1);
             });
           } else {
-            resolve(`Until node compiled in ${index} cycles`);
+            resolve(isComplete);
           }
         });
       })(this, store, console, context, 0);

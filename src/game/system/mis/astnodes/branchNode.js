@@ -17,12 +17,12 @@ export default class BranchNode {
 
     // ensure all animations complete before jumping to the next
     return new Promise((resolve, reject) => {
-      (function loop(nodes, store, console, context, index) {
-        if (nodes.length != 0 && !store.getState().client.isTerminated()) {
-          const node = nodes.shift();
+      (function loop(branch, store, console, context, index) {
+        if (index < branch.nodes.length && !store.getState().client.isTerminated()) {
+          const node = branch.nodes[index];
           node.compile(store, console, context).then((result) => {
             window.console.log('result', result);
-            loop(nodes, store, console, context, index+1);
+            loop(branch, store, console, context, index+1);
           }).catch((err) => {
             store.getState().client.systemTerminate(true);
             store.dispatch(console(`${err.name}: ${err.message}`));
@@ -31,8 +31,8 @@ export default class BranchNode {
         if (store.getState().client.isTerminated()) {
           store.dispatch(console('System Terminated by user'));
         }
-        resolve('Branch compiled');
-      })(this.nodes, store, console, context, 0);
+        resolve(branch);
+      })(this, store, console, context, 0);
     });
   }
 
