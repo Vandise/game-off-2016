@@ -28,7 +28,7 @@ digits = [0-9]
   return 'T_LT';
 }
 
-<>\>= {
+<>\<= {
   return 'T_LE';
 }
 

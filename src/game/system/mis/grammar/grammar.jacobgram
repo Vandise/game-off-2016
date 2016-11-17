@@ -28,11 +28,34 @@ Expressions =
 Expression =
     Literal
   | Call
+  | Maths
+  | Conditionals
   | SetLocal
   | GetLocal
   | If
   | 'T_OPEN_PAREN' Expression 'T_CLOSE_PAREN' function(o, expression, c) {
       return expression;
+    }
+  ;
+
+Conditionals =
+    Expression 'T_GT' Expression function(val1, op, val2) {
+      return new imports.ast.LiteralNode(val1.value > val2.value ? true : false);
+    }
+  | Expression 'T_GE' Expression function(val1, op, val2) {
+      return new imports.ast.LiteralNode(val1.value >= val2.value ? true : false);
+    }
+  | Expression 'T_LT' Expression function(val1, op, val2) {
+      return new imports.ast.LiteralNode(val1.value < val2.value ? true : false);
+    }
+  | Expression 'T_LE' Expression function(val1, op, val2) {
+      return new imports.ast.LiteralNode(val1.value <= val2.value ? true : false);
+    }
+  | Expression 'T_EQUAL' Expression function(val1, op, val2) {
+      return new imports.ast.LiteralNode(val1.value === val2.value ? true : false);
+    }
+  | Expression 'T_NOT_EQUAL' Expression function(val1, op, val2) {
+      return new imports.ast.LiteralNode(val1.value != val2.value ? true : false);
     }
   ;
 
@@ -100,7 +123,6 @@ Call =
     'T_IDENTIFIER' 'T_OPEN_PAREN' Arguments 'T_CLOSE_PAREN' function(name, p1, args, p2) {
       return new imports.ast.CallNode(name, args);
     }
-  | Maths
   ;
 
 Arguments =
