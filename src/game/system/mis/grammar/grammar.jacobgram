@@ -1,7 +1,7 @@
 %moduleName MisParser
 %mode LALR
 
-%left 'T_MULTIPLY' 'T_DIVIDE'
+%left 'T_MULTIPLY' 'T_DIVIDE' 'T_MODULO' 'T_CARROT'
 %left 'T_PLUS' 'T_MINUS'
 %left 'T_GT' 'T_GE' 'T_LT' 'T_LE'
 %left 'T_COLONEQUAL' 'T_NOT_EQUAL'
@@ -27,11 +27,35 @@ Expressions =
 
 Expression =
     Literal
+  | Call
   | SetLocal
   | GetLocal
-  | Loop
   | If
-  | Call
+  | Maths
+  | 'T_OPEN_PAREN' Expression 'T_CLOSE_PAREN' function(o, expression, c) {
+      return expression;
+    }
+  ;
+
+Maths =
+    Expression 'T_PLUS' Expression function(val1, op, val2) {
+      return new imports.ast.LiteralNode(val1.value + val2.value);
+    }
+  | Expression 'T_MINUS' Expression function(val1, op, val2) {
+      return new imports.ast.LiteralNode(val1.value - val2.value);
+    }
+  | Expression 'T_MULTIPLY' Expression function(val1, op, val2) {
+      return new imports.ast.LiteralNode(val1.value * val2.value);
+    }
+  | Expression 'T_DIVIDE' Expression function(val1, op, val2) {
+      return new imports.ast.LiteralNode(val1.value / val2.value);
+    }
+  | Expression 'T_MODULO' Expression function(val1, op, val2) {
+      return new imports.ast.LiteralNode(val1.value % val2.value);
+    }
+  | Expression 'T_CARROT' Expression function(val1, op, val2) {
+      return new imports.ast.LiteralNode(Math.pow(val1.value, val2.value));
+    }
   ;
 
 Literal =
@@ -55,6 +79,7 @@ GetLocal =
     }
   ;
 
+/*
 Loop =
     'T_LOOP' 'T_DO' Terminator
       Expressions
@@ -62,6 +87,7 @@ Loop =
       return new imports.ast.LoopNode(expressions, condition);
     }
   ;
+*/
 
 If =
     'T_IF' Expression Terminator

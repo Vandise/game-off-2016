@@ -24,6 +24,7 @@ export default class SystemDriver {
       let code = "";
       const data = this.codeText.split('\n');     // there's a bug in the parser with whitespace.
       data.forEach((line) => {
+        if(line === '') return;
         code += line.replace(/^[ ]+|[ ]+$/g,'');
         code += "\n";        
       });
@@ -35,7 +36,7 @@ export default class SystemDriver {
         this.store.dispatch(addConsoleMessage(e.message));
       }
 
-      console.debug(code);
+      console.log(ast);
 
       try {      
         (new Runtime(ast, this.store, addConsoleMessage).execute());

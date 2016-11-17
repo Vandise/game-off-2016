@@ -60,6 +60,10 @@ digits = [0-9]
   return 'T_MODULO';
 }
 
+<>\^ {
+  return 'T_CARROT';
+}
+
 <>:= {
   return 'T_COLONEQUAL';
 }
