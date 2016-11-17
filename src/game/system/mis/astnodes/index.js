@@ -5,6 +5,7 @@ import GetLocalNode from './getLocalNode';
 import UntilNode from './untilNode';
 import IfNode from './ifNode';
 import CallNode from './callNode';
+import ConditionNode from './conditionNode';
 
 export default {
   LiteralNode,
@@ -14,4 +15,5 @@ export default {
   UntilNode,
   IfNode,
   CallNode,
+  ConditionNode,
 };

@@ -41,22 +41,22 @@ Expression =
 
 Conditionals =
     Expression 'T_GT' Expression function(val1, op, val2) {
-      return new imports.ast.LiteralNode(val1.value > val2.value ? true : false);
+      return new imports.ast.ConditionNode(val1, op, val2);
     }
   | Expression 'T_GE' Expression function(val1, op, val2) {
-      return new imports.ast.LiteralNode(val1.value >= val2.value ? true : false);
+      return new imports.ast.ConditionNode(val1, op, val2);
     }
   | Expression 'T_LT' Expression function(val1, op, val2) {
-      return new imports.ast.LiteralNode(val1.value < val2.value ? true : false);
+      return new imports.ast.ConditionNode(val1, op, val2);
     }
   | Expression 'T_LE' Expression function(val1, op, val2) {
-      return new imports.ast.LiteralNode(val1.value <= val2.value ? true : false);
+      return new imports.ast.ConditionNode(val1, op, val2);
     }
   | Expression 'T_EQUAL' Expression function(val1, op, val2) {
-      return new imports.ast.LiteralNode(val1.value === val2.value ? true : false);
+      return new imports.ast.ConditionNode(val1, op, val2);
     }
   | Expression 'T_NOT_EQUAL' Expression function(val1, op, val2) {
-      return new imports.ast.LiteralNode(val1.value != val2.value ? true : false);
+      return new imports.ast.ConditionNode(val1, op, val2);
     }
   ;
 
