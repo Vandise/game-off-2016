@@ -120,8 +120,14 @@ if x = 10
 end
 ```
 
-[ ] Loop Until
-Not Yet Implemented
+[ x ] Loop Until
+```
+x := 0
+until x >= 10 do
+  x := x + 1
+  log(x)
+end
+```
 
 [ ] For Loop
 

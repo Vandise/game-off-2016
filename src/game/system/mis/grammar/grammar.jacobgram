@@ -33,6 +33,7 @@ Expression =
   | SetLocal
   | GetLocal
   | If
+  | Until
   | 'T_OPEN_PAREN' Expression 'T_CLOSE_PAREN' function(o, expression, c) {
       return expression;
     }
@@ -101,15 +102,13 @@ GetLocal =
     }
   ;
 
-/*
-Loop =
-    'T_LOOP' 'T_DO' Terminator
+Until =
+    'T_UNTIL' Expression 'T_DO' Terminator
       Expressions
-    'T_UNTIL' Expression function(loop, _, terminator, expressions, until, condition) {
-      return new imports.ast.LoopNode(expressions, condition);
-    }
+    'T_END' function(_a, condition, _do, _term, expressions, _end){
+              console.log(condition, expressions); 
+            }
   ;
-*/
 
 If =
     'T_IF' Expression Terminator
