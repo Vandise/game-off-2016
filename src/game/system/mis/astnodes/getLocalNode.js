@@ -9,7 +9,7 @@ export default class GetLocalNode {
   compile(store, console, context) {
     //store.dispatch(console(`Compiling GetLocal Node: ${this.variable}`));
     return new Promise((resolve, reject) => {
-      if (!context.variables[this.variable]) {
+      if (Object.keys(context.variables).indexOf(this.variable) < 0) {
         reject(e.UndefinedVariable(this.variable));
       }
       resolve(context.variables[this.variable]);

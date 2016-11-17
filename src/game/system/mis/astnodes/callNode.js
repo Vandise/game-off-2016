@@ -10,13 +10,17 @@ export default class CallNode {
   compile(store, console, context) {
     //store.dispatch(console(`Compiling Call to ${this.name}`));
     const params = this.parameters.map((param) => {
-      return param.compile(store, console, context);
+      return param.compile(store, console, context).then((result) => {
+        return result;
+      });
     });
-    if (context.functions[this.name]) {
-      return context.functions[this.name](params, context, store, console);
-    }
-    store.dispatch(console(`Call to undefined function ${this.name}`));
-    throw UndefinedFunction();
+    return Promise.all(params).then((args) => {
+      if (context.functions[this.name]) {
+        return context.functions[this.name](args, context, store, console);
+      }
+      store.dispatch(console(`Call to undefined function ${this.name}`));
+      throw UndefinedFunction();
+    });
   }
 
 }
