@@ -35,6 +35,10 @@ class Player extends Phaser.Sprite {
       this.animations.play(`walk_${direction}`);
       let travelDistance = 0;
 
+      this.game.dispatch(addConsoleMessage(
+        `Player-environment collision detected, backtracking 1 step.`
+      ));
+
       const movement = setInterval(() => {
 
         if (travelDistance >= returnDistance) {
@@ -113,9 +117,6 @@ class Player extends Phaser.Sprite {
   
           this.animations.stop(DEFAULT_FRAME, true);
           clearInterval(movement);
-          this.game.dispatch(addConsoleMessage(
-            `Player-environment collision detected, backtracking 1 step.`
-          ));
           this.returnFromCollision(startX - this.x, "right").then((result) => {
             console.log('Result', result);
             resolve('Animation Complete');
@@ -155,9 +156,6 @@ class Player extends Phaser.Sprite {
   
           this.animations.stop(DEFAULT_FRAME, true);
           clearInterval(movement);
-          this.game.dispatch(addConsoleMessage(
-            `Player-environment collision detected, backtracking 1 step.`
-          ));
           this.returnFromCollision(this.x - startX, "left").then((result) => {
             console.log('Result', result);
             resolve('Animation Complete');
@@ -198,9 +196,6 @@ class Player extends Phaser.Sprite {
   
           this.animations.stop(DEFAULT_FRAME, true);
           clearInterval(movement);
-          this.game.dispatch(addConsoleMessage(
-            `Player-environment collision detected, backtracking 1 step.`
-          ));
           this.returnFromCollision(this.y - startY, "down").then((result) => {
             console.log('Result', result);
             resolve('Animation Complete');
@@ -240,9 +235,6 @@ class Player extends Phaser.Sprite {
   
           this.animations.stop(DEFAULT_FRAME, true);
           clearInterval(movement);
-          this.game.dispatch(addConsoleMessage(
-            `Player-environment collision detected, backtracking 1 step.`
-          ));
           this.returnFromCollision(startY - this.y, "up").then((result) => {
             console.log('Result', result);
             resolve('Animation Complete');
