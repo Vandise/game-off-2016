@@ -18,6 +18,7 @@ export default class extends Phaser.Game {
     this.music = null;
     this.map = null;
     this.collisionGroup = null;
+    this.systemGrid = null;
     this.terminated = false;
   }
 
@@ -34,9 +35,17 @@ export default class extends Phaser.Game {
     this.state.start(state);
   }
 
+  setUserProperty(property, field, value) {
+    const validProperties = ['systemGrid', 'terminated'];
+    if (validProperties.indexOf(property) != -1) {
+      this[property][field] = value;
+    }
+  }
+
   getUserConfiguration() {
     return {
       showBounds: this.collisionGroup.visible,
+      systemGrid: this.systemGrid.visible,
     };
   }
 

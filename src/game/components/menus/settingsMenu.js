@@ -16,6 +16,13 @@ export default class SettingsMenu extends React.Component {
     this.props.client.setCollisionBoundsVisibility(status);
   }
 
+  setUserConfiguration(property, field, value) {
+    this.props.client.setUserProperty(property, field, value);
+    const state = {};
+    state[property] = value;
+    this.setState(state);
+  }
+
   render() {
     return (
       <div className='menu'>
@@ -34,6 +41,20 @@ export default class SettingsMenu extends React.Component {
                   onChange={() => this.setCollisionBounds()}
                 />
               </label>
+            </div>
+            <div>
+              <label htmlFor='systemGrid'>
+                *Show System Grid: 
+                <input
+                  type='checkbox'
+                  id='systemGrid'
+                  checked={this.state.systemGrid}
+                  onChange={() => this.setUserConfiguration('systemGrid', 'visible', this.state.systemGrid ? false : true)}
+                />
+              </label>
+            </div>
+            <div>
+              <p>* Used for debugging purposes</p>
             </div>
           </div>
           <div className='modal-footer'>

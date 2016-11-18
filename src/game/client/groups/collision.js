@@ -18,20 +18,6 @@ class CollisionGroup extends Phaser.Group {
       let sprite = this.game.add.sprite(obj.x, obj.y, gfx, 0, collisionBounds);
       sprite.immovable = true;
 
-        //var platformbmd = this.game.add.bitmapData(80, 16);
-        //platformbmd.ctx.rect(0, 0, 80, 16);
-        //platformbmd.ctx.fillStyle = "#fff";
-        //platformbmd.ctx.fill();        
-        
-      /*
-      let gfx = this.game.add.graphics(0,0);
-      gfx.beginFill(0x00FFFF, 1);
-      gfx.boundsPadding = 0;
-      gfx.drawRect(obj.x, obj.y, obj.width, obj.height);
-
-      //let sSprite = this.game.add.sprite(0, 0);
-      //sSprite.addChild(gfx);
-      */
       this.game.physics.enable(sprite, Phaser.Physics.ARCADE);
       collisionBounds.add(sprite);
       collisionBounds.visible = false;

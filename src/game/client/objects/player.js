@@ -50,8 +50,10 @@ class Player extends Phaser.Sprite {
               this.x -= 4;
               break;
             case "up":
+              this.y += 4;
               break;
             case "down":
+              this.y -= 4;
               break;
           }
           travelDistance += 4;
@@ -175,17 +177,36 @@ class Player extends Phaser.Sprite {
       let moveDistance = 0;
       const computedDistance = (40*distance);
       this.animations.play('walk_up');
+      let startY = this.y;
       const movement = setInterval(() => {
+
         console.log('Player coords:', this.x, this.y);
-        if (moveDistance >= computedDistance) {
+
+        if(!this.game.isTerminated()) {
+
+          if (moveDistance >= computedDistance) {
+            this.animations.stop(DEFAULT_FRAME, true);
+            clearInterval(movement);
+            resolve('Animation Complete');
+            console.log('Final coords:', this.x, this.y);
+          } else {
+            this.y += 4;
+            moveDistance += 4;
+          }
+
+        } else {
+  
           this.animations.stop(DEFAULT_FRAME, true);
           clearInterval(movement);
-          resolve('Animation Complete');
-          console.log('Final coords:', this.x, this.y);
-        } else {
-          this.y += 4;
-          moveDistance += 4;
+          this.game.dispatch(addConsoleMessage(
+            `Player-environment collision detected, backtracking 1 step.`
+          ));
+          this.returnFromCollision(this.y - startY, "down").then((result) => {
+            console.log('Result', result);
+            resolve('Animation Complete');
+          });
         }
+
       }, 100);
     });
   }
@@ -198,17 +219,36 @@ class Player extends Phaser.Sprite {
       let moveDistance = 0;
       const computedDistance = (40*distance);
       this.animations.play('walk_down');
+      let startY = this.y;
       const movement = setInterval(() => {
+
         console.log('Player coords:', this.x, this.y);
-        if (moveDistance >= computedDistance) {
+
+        if(!this.game.isTerminated()) {
+
+          if (moveDistance >= computedDistance) {
+            this.animations.stop(DEFAULT_FRAME, true);
+            clearInterval(movement);
+            resolve('Animation Complete');
+            console.log('Final coords:', this.x, this.y);
+          } else {
+            this.y -= 4;
+            moveDistance += 4;
+          }
+
+        } else {
+  
           this.animations.stop(DEFAULT_FRAME, true);
           clearInterval(movement);
-          resolve('Animation Complete');
-          console.log('Final coords:', this.x, this.y);
-        } else {
-          this.y -= 4;
-          moveDistance += 4;
+          this.game.dispatch(addConsoleMessage(
+            `Player-environment collision detected, backtracking 1 step.`
+          ));
+          this.returnFromCollision(startY - this.y, "up").then((result) => {
+            console.log('Result', result);
+            resolve('Animation Complete');
+          });
         }
+
       }, 100);
     });
   }

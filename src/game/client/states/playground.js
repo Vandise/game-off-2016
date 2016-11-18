@@ -20,7 +20,6 @@ export default class extends Phaser.State {
 
   create() {
     this.game.time.advancedTiming = true;
-    //const gridSprite = this.game.add.tileSprite(0, 0, this.game.width, this.game.height, 'gridBg');
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
     this.game.map = this.game.add.tilemap('playground');
@@ -29,6 +28,9 @@ export default class extends Phaser.State {
     this.game.detailLayer = this.game.map.createLayer('details');
     this.game.pathLayer.resizeWorld();
     this.game.detailLayer.resizeWorld();
+
+    this.game.systemGrid = this.game.add.tileSprite(0, 0, this.game.width, this.game.height, 'gridBg');
+    this.game.systemGrid.visible = false;
 
     // Draw the collision bounds
     this.game.collisionGroup = new CollisionGroup(
