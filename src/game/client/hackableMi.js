@@ -34,6 +34,18 @@ export default class extends Phaser.Game {
     this.state.start(state);
   }
 
+  getUserConfiguration() {
+    return {
+      showBounds: this.collisionGroup.visible,
+    };
+  }
+
+  setCollisionBoundsVisibility(visible) {
+    if (this.collisionGroup) {
+      this.collisionGroup.visible = visible;
+    }
+  }
+
   isTerminated() {
     return this.terminated;
   }

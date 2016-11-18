@@ -34,6 +34,7 @@ class CollisionGroup extends Phaser.Group {
       */
       this.game.physics.enable(sprite, Phaser.Physics.ARCADE);
       collisionBounds.add(sprite);
+      collisionBounds.visible = false;
     });
     return collisionBounds;
   }

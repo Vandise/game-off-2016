@@ -1,5 +1,6 @@
 import React from 'react';
 import { executeCode, terminateCode } from '../../actions/playerActions';
+import { setMenu } from '../../actions/menuActions';
 
 // eslint-disable-next-line no-unused-vars
 import Styles from '../../../stylesheets/menus/codeMenu';
@@ -56,6 +57,7 @@ export default class extends React.Component {
       <div className='codeMenu'>
         <div className='header'>
           <h3>Code</h3>
+          <span className='button' onClick={() => this.props.dispatch(setMenu('settingsMenu', true)) }>Settings</span>
         </div>
         <div className='codeBody'>
           <textarea className='miCode' ref='miCode' onKeyDown={(e) => this.handleTabs(e) }></textarea>

@@ -11,6 +11,7 @@ const initialState = {
     codeMenu: { open: false },
     consoleMenu: { open: false },
     playerMenu: { open: false },
+    settingsMenu: { open: false },
   },
   console: {
     messages: [],

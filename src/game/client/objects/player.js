@@ -19,7 +19,7 @@ class Player extends Phaser.Sprite {
     this.animations.add('walk_right', [3, 4, 5], ANIMATION_SPEED, true);
     this.animations.add('walk_up', [6, 7, 8], ANIMATION_SPEED, true);
     this.animations.add('walk_left', [9, 10, 11], ANIMATION_SPEED, true);
-    //window.player = for debugging coordinates and hackery moving from the browser
+    window.player = this;
     return this;    
   }
 

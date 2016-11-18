@@ -3,6 +3,7 @@ import aboutMenu from './aboutMenu';
 import codeMenu from './codeMenu';
 import consoleMenu from './consoleMenu';
 import playerMenu from './playerMenu';
+import settingsMenu from './settingsMenu';
 
 export default {
   mainMenu,
@@ -10,4 +11,5 @@ export default {
   codeMenu,
   consoleMenu,
   playerMenu,
+  settingsMenu,
 };
