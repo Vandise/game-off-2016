@@ -7,7 +7,7 @@ const ANIMATION_SPEED = 8;
 class Player extends Phaser.Sprite {
 
   constructor(game) {
-    super(game, (13*40)-20, (3*40)-20, SPRITE_SHEET, DEFAULT_FRAME);
+    super(game, (11*40)-20, (3*40)-20, SPRITE_SHEET, DEFAULT_FRAME);
   }
 
   load() {
@@ -30,6 +30,38 @@ class Player extends Phaser.Sprite {
     };
   }
 
+  returnFromCollision(returnDistance, direction) {
+    return new Promise((resolve, reject) => {
+      this.animations.play(`walk_${direction}`);
+      let travelDistance = 0;
+
+      const movement = setInterval(() => {
+
+        if (travelDistance >= returnDistance) {
+          this.animations.stop(DEFAULT_FRAME, true);
+          clearInterval(movement);
+          resolve('Animation Complete');
+        } else {
+          switch(direction) {
+            case "right":
+              this.x += 4;
+              break;
+            case "left":
+              this.x -= 4;
+              break;
+            case "up":
+              break;
+            case "down":
+              break;
+          }
+          travelDistance += 4;
+        }
+
+      }, 100);
+      resolve('Returned to original position');
+    });
+  }
+
   move(direction, distance = 1) {
     switch(direction) {
       case 'left':
@@ -50,23 +82,44 @@ class Player extends Phaser.Sprite {
 
   move_left(distance) {
     return new Promise((resolve, reject) => {
+
       this.game.dispatch(addConsoleMessage(
         `Player moved: left, Distance: ${distance}`
       ));
       this.animations.play('walk_left');
+
       let moveDistance = 0;
+      const startX = this.x;
       const computedDistance = distance > 1 ? (40 * distance) : ((40 * distance));
       const movement = setInterval(() => {
+
         console.log('Player coords:', this.x, this.y);
-        if (moveDistance >= computedDistance) {
+
+        if(!this.game.isTerminated()) {
+
+          if (moveDistance >= computedDistance) {
+            this.animations.stop(DEFAULT_FRAME, true);
+            clearInterval(movement);
+            resolve('Animation Complete');
+            console.log('Final coords:', this.x, this.y);
+          } else {
+            this.x -= 4;
+            moveDistance += 4;
+          }
+
+        } else {
+  
           this.animations.stop(DEFAULT_FRAME, true);
           clearInterval(movement);
-          resolve('Animation Complete');
-          console.log('Final coords:', this.x, this.y);
-        } else {
-          this.x -= 4;
-          moveDistance += 4;
+          this.game.dispatch(addConsoleMessage(
+            `Player-environment collision detected, backtracking 1 step.`
+          ));
+          this.returnFromCollision(startX - this.x, "right").then((result) => {
+            console.log('Result', result);
+            resolve('Animation Complete');
+          });
         }
+
       }, 100);
     });
   }
@@ -79,17 +132,36 @@ class Player extends Phaser.Sprite {
       let moveDistance = 0;
       const computedDistance = distance > 1 ? (40 * distance) : ((40 * distance));
       this.animations.play('walk_right');
+      const startX = this.x;
       const movement = setInterval(() => {
+
         console.log('Player coords:', this.x, this.y);
-        if (moveDistance >= computedDistance) {
+
+        if(!this.game.isTerminated()) {
+
+          if (moveDistance >= computedDistance) {
+            this.animations.stop(DEFAULT_FRAME, true);
+            clearInterval(movement);
+            resolve('Animation Complete');
+            console.log('Final coords:', this.x, this.y);
+          } else {
+            this.x += 4;
+            moveDistance += 4;
+          }
+
+        } else {
+  
           this.animations.stop(DEFAULT_FRAME, true);
           clearInterval(movement);
-          resolve('Animation Complete');
-          console.log('Final coords:', this.x, this.y);
-        } else {
-          this.x += 4;
-          moveDistance += 4;
+          this.game.dispatch(addConsoleMessage(
+            `Player-environment collision detected, backtracking 1 step.`
+          ));
+          this.returnFromCollision(this.x - startX, "left").then((result) => {
+            console.log('Result', result);
+            resolve('Animation Complete');
+          });
         }
+
       }, 100);
     });
 

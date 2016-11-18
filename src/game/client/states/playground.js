@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import Player from '../objects/player';
+import CollisionGroup from '../groups/collision';
 import { setMenu } from '../../actions/menuActions';
 import { addConsoleMessage } from '../../actions/consoleActions';
 
@@ -13,17 +14,25 @@ export default class extends Phaser.State {
     this.load.image('gridBg', 'assets/gridsquare.jpg', 32, 36);
     this.load.spritesheet('mi', 'assets/player.png', 32, 36, 12);
     this.load.audio('dungeon_music', ['assets/audio/dungeon_1.mp3', 'assets/audio/dungeon_2.mp3', 'assets/audio/intro.mp3', ]);
+    this.load.tilemap('playground', 'assets/maps/json/playground.json', null, Phaser.Tilemap.TILED_JSON);
+    this.load.image('tiles', 'assets/maps/dungeon.png');
   }
 
   create() {
     this.game.time.advancedTiming = true;
-    const gridSprite = this.game.add.tileSprite(0, 0, this.game.width, this.game.height, 'gridBg');
-    // Lots of stuff to do here!
-    // - Initialize player
-    // - load command (Mi script terminal)
-    // - load command console
-    // - show player inventory (1 item)
+    //const gridSprite = this.game.add.tileSprite(0, 0, this.game.width, this.game.height, 'gridBg');
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
+
+    this.game.map = this.game.add.tilemap('playground');
+    this.game.map.addTilesetImage('map_40x40', 'tiles');
+    this.game.pathLayer = this.game.map.createLayer('path');
+    this.game.detailLayer = this.game.map.createLayer('details');
+    this.game.pathLayer.resizeWorld();
+    this.game.detailLayer.resizeWorld();
+
+    // Draw the collision bounds
+    this.game.collisionGroup = new CollisionGroup(
+      this.game, this.game.map.objects.Collision).load();
 
     this.game.player = new Player(this.game).load();
     // testing animations for fun
@@ -39,12 +48,16 @@ export default class extends Phaser.State {
     return true;
   }
 
+  collided() {
+    this.game.systemTerminate(true);
+  }
+
   render() {
     this.game.debug.text(this.game.time.fps, 2, 14, "#00ff00");    
   }
 
   update() {
-    
+    this.game.physics.arcade.collide(this.game.player, this.game.collisionGroup, this.collided, null, this);
   }
 
 }

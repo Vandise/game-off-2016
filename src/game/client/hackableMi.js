@@ -16,6 +16,8 @@ export default class extends Phaser.Game {
     this.state.add('Playground', Playground, false);
     this.dispatch = dispatch;
     this.music = null;
+    this.map = null;
+    this.collisionGroup = null;
     this.terminated = false;
   }
 
