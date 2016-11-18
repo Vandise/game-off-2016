@@ -4,7 +4,7 @@
   "description": "Game",
   "main": "dist/index.js",
   "scripts": {
-    "build": "rm -rf dist/* && babel src --out-dir dist",
+    "build": "./node_modules/.bin/gulp build",
     "test": "NODE_ENV=test mocha --require ignore-styles --opts spec/mocha.opts ${FILE:-spec}",
     "start": "./node_modules/.bin/gulp watch",
     "lint": "eslint --fix ${FILE:-src spec} && echo '\\033[0;32mAll Good\\033[0m' || true",

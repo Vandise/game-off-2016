@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var webpack = require("webpack");
 var WebpackDevServer = require("webpack-dev-server");
 var webpackConfig = require("./webpack.config.js");
+var prodConfig = require('./webpack.production.js');
 var gutil = require('gulp-util');
 var shell = require('gulp-shell');
 
@@ -12,7 +13,7 @@ gulp.task('copy-assets', function() {
 gulp.task('grammar', shell.task(['node node_modules/.bin/jacob -t src/game/system/mis/grammar/tokens.jacoblex -l src/game/system/mis/lexer.js -g src/game/system/mis/grammar/grammar.jacobgram -p src/game/system/mis/parser.js']));
 
 gulp.task("webpack:build", function(callback) {
-  return webpack(webpackConfig, function(err, stats) {
+  return webpack(prodConfig, function(err, stats) {
     if (err) {
       throw new gutil.PluginError("webpack:build", err);
     }
