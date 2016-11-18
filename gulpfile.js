@@ -62,7 +62,7 @@ gulp.task('default', function() {
   return gulp.start('build');
 });
 
-gulp.task('build', ['webpack:build', 'copy-assets']);
+gulp.task('build', ['grammar', 'webpack:build', 'copy-assets']);
 
 gulp.task('watch', ['copy-assets', 'grammar', 'webpack-dev-server'], function() {
   return gulp.watch(['assets/**', 'src/game/system/mis/grammar/**'], ['copy-assets', 'grammar']);
