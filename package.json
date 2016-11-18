@@ -6,7 +6,8 @@
   "scripts": {
     "build": "./node_modules/.bin/gulp build",
     "test": "NODE_ENV=test mocha --require ignore-styles --opts spec/mocha.opts ${FILE:-spec}",
-    "start": "./node_modules/.bin/gulp watch",
+    "start:dev": "./node_modules/.bin/gulp watch",
+    "start": "npm run build && node index.js",
     "lint": "eslint --fix ${FILE:-src spec} && echo '\\033[0;32mAll Good\\033[0m' || true",
     "cover": "nyc --require babel-core/register -a npm test"
   },
@@ -75,6 +76,7 @@
   },
   "dependencies": {
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "express": "^4.14.0",
     "jacob": "^1.0.5",
     "phaser": "^2.6.2",
     "redux-actions": "^0.12.0"
