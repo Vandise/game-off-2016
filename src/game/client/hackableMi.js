@@ -3,6 +3,7 @@ import 'p2';
 import Phaser from 'phaser';
 import MainMenu from './states/mainMenu';
 import Playground from './states/playground';
+import Loading from './states/loading';
 import { closeAllMenus } from '../actions/menuActions';
 
 export default class extends Phaser.Game {
@@ -14,12 +15,14 @@ export default class extends Phaser.Game {
     this.isInitialized = false;
     this.state.add('MainMenu', MainMenu, false);
     this.state.add('Playground', Playground, false);
+    this.state.add('Loading', Loading, false);
     this.dispatch = dispatch;
     this.music = null;
     this.map = null;
     this.collisionGroup = null;
     this.systemGrid = null;
     this.terminated = false;
+    this.nextState = null;
   }
 
   initialize() {
@@ -32,7 +35,8 @@ export default class extends Phaser.Game {
       this.music.pause();
     }
     this.dispatch(closeAllMenus());
-    this.state.start(state);
+    this.nextState = state;
+    this.state.start('Loading');
   }
 
   setUserProperty(property, field, value) {

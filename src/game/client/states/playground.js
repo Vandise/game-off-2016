@@ -46,7 +46,7 @@ export default class extends Phaser.State {
     this.game.dispatch(setMenu('playerMenu', true));
     this.game.dispatch(addConsoleMessage('Initialized Playground testing area'));
     this.game.music = this.add.audio('dungeon_music');
-    //this.game.music.play();
+    this.game.music.play();
     return true;
   }
 
