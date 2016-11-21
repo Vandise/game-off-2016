@@ -6,8 +6,9 @@ const ANIMATION_SPEED = 8;
 
 class Player extends Phaser.Sprite {
 
-  constructor(game) {
-    super(game, (11*40)-20, (3*40)-20, SPRITE_SHEET, DEFAULT_FRAME);
+  constructor(game, startX, startY) {
+    // (11*40)-20, (3*40)-20
+    super(game, (startX * 40) - 20, (startY * 40) - 20, SPRITE_SHEET, DEFAULT_FRAME);
   }
 
   load() {
