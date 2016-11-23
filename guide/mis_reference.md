@@ -26,6 +26,7 @@ Integers are generally utilized in MiScript for incrementing counters and having
 
 ## Math
 MiScript implements all major mathematical operations (not functions). These operations include:
+
 [x] Addition
 ```
 10 + 10
@@ -162,4 +163,10 @@ log("The value of x is:", x)
 Moves the Mi sprite in the specified direction on the grid.
 ```
 move("left", 3)
+```
+
+#### use [item_name<string>] -> console message
+Utilizes the current item in the inventory. Outputs a console message stating if the item was used or exists.
+```
+use("silver_key")
 ```
