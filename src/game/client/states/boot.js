@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-const styles = { font: "32px pixeled", fill: '#000' };
+const styles = { font: "32px pixeled", fill: '#fff' };
 let text = null;
 let mi = null;
 let progressBar = null;
@@ -15,30 +15,18 @@ export default class extends Phaser.State {
   }
 
   loadAssets() {
-    this.load.image('gridBg', 'assets/gridsquare.jpg', 32, 36);
-    this.load.audio('dungeon_music', 'assets/audio/dungeon_1.mp3');
-    this.load.audio('dungeon_2', 'assets/audio/dungeon_2.mp3');
-    this.load.image('tiles', 'assets/maps/dungeon.png');
-    this.load.spritesheet('items', 'assets/maps/items.png', 40, 40);
+    this.load.image('mainmenu_bg', 'assets/mainmenu_bg.jpg');
+    this.load.image('greeting_bubble', 'assets/greeting_bubble.png');
+    this.load.image('blank_bubble', 'assets/blank_bubble.png');
+    this.load.spritesheet('mi', 'assets/player.png', 32, 36, 12);
+    this.load.audio('intro_music', 'assets/audio/intro.mp3');
     this.game.load.start();
   }
 
   loadStart() {
 
-    mi = this.add.sprite(this.game.world.centerX - 100, this.game.world.centerY - 100, 'mi');
-    mi.scale.setTo(2, 2);
-    mi.animations.add('walk_down', [6, 7, 8], 8, true);
-    mi.animations.play('walk_down');
-
-    let bubble = this.add.sprite(0, 0, 'blank_bubble');
-    bubble.scale.setTo(0.3, 0.3);
-    bubble = mi.addChild(bubble);
-    bubble.y -= 40;
-    bubble.x += 0;
-
-    text = this.game.add.text(0, 0, 'Loading...', styles);
+    text = this.game.add.text(this.game.world.centerX - 250, this.game.world.centerY - 210, 'Loading...', styles);
     text.anchor.set(0);
-    text = bubble.addChild(text);
     text.y += 37;
     text.x += 35;
 
@@ -66,7 +54,7 @@ export default class extends Phaser.State {
   }
 
   create() {
-    this.game.state.start(this.game.nextState);
+    this.game.state.start('MainMenu');
   }
 
 }

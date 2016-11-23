@@ -4,6 +4,7 @@ import Phaser from 'phaser';
 import MainMenu from './states/mainMenu';
 import Playground from './states/playground';
 import Loading from './states/loading';
+import Boot from './states/boot';
 import { closeAllMenus } from '../actions/menuActions';
 
 export default class extends Phaser.Game {
@@ -16,6 +17,7 @@ export default class extends Phaser.Game {
     this.state.add('MainMenu', MainMenu, false);
     this.state.add('Playground', Playground, false);
     this.state.add('Loading', Loading, false);
+    this.state.add('Boot', Boot, false);
     this.dispatch = dispatch;
     this.music = null;
     this.map = null;
@@ -28,7 +30,7 @@ export default class extends Phaser.Game {
 
   initialize() {
     this.isInitialized = true;
-    this.state.start('MainMenu');
+    this.state.start('Boot');
   }
 
   transitionState(state) {

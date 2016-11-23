@@ -8,11 +8,13 @@ export default class extends Phaser.State {
   }
 
   preload() {
+    /*
     this.load.image('mainmenu_bg', 'assets/mainmenu_bg.jpg');
     this.load.image('greeting_bubble', 'assets/greeting_bubble.png');
     this.load.image('blank_bubble', 'assets/blank_bubble.png');
     this.load.spritesheet('mi', 'assets/player.png', 32, 36, 12);
     this.load.audio('intro_music', 'assets/audio/intro.mp3');
+    */
   }
 
   create() {
