@@ -4,7 +4,7 @@ import { addItem, useItem } from '../../actions/playerActions';
 const SPRITE_SHEET = 'mi';
 const DEFAULT_FRAME = 7;
 const ANIMATION_SPEED = 8;
-const MOVE_SPEED = 10;
+const MOVE_SPEED = 85;
 
 class Player extends Phaser.Sprite {
 
@@ -34,12 +34,14 @@ class Player extends Phaser.Sprite {
   }
 
   pickUpItem(self, item) {
-    console.log('Picking up', self, item); 
     this.game.dispatch(addItem(
       {
         name: item.name,
         image: `/assets/items/${item.name}.png`,
       }
+    ));
+    this.game.dispatch(addConsoleMessage(
+      `Picked up item: ${item.name}`
     ));
     item.kill();
   }
