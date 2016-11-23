@@ -16,6 +16,7 @@ const initialState = {
   console: {
     messages: [],
   },
+  inventory: null,
 };
 
 const reducers = combineReducers(Reducers);

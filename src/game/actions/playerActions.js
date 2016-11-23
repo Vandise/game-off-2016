@@ -1,4 +1,4 @@
-import { EXECUTE_CODE, TERMINATE_CODE } from '../constants/actions';
+import { EXECUTE_CODE, TERMINATE_CODE, ADD_ITEM, USE_ITEM } from '../constants/actions';
 
 export function executeCode(code) {
   return {
@@ -15,5 +15,19 @@ export function terminateCode(hault = true) {
     payload: {
       status: hault,
     },
+  };
+};
+
+export function addItem(itemObj) {
+  return {
+    type: ADD_ITEM,
+    payload: itemObj,
+  };
+};
+
+export function useItem() {
+  return {
+    type: USE_ITEM,
+    payload: {},
   };
 };

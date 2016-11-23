@@ -5,3 +5,5 @@ export const TRANSITION_STATE = 'TRANSITION_STATE';
 export const ADD_CONSOLE_MESSAGE = 'ADD_CONSOLE_MESSAGE';
 export const EXECUTE_CODE = 'EXECUTE_CODE';
 export const TERMINATE_CODE = 'TERMINATE_CODE';
+export const ADD_ITEM = 'ADD_ITEM';
+export const USE_ITEM = 'USE_ITEM';
