@@ -11,11 +11,16 @@ export default (args, context, store, console) => {
   );
   return new Promise((resolve, reject) => {
     const caniUseNow = false;
-    if (!caniUseNow) {
-      store.dispatch(console(`Unable to use item '${args[0]}' at this time`));
-      resolve('Use function complete');
+    const item = store.getState().inventory;
+    if (item === null || item.name != args[0]) {
+      store.dispatch(console(`You do not have the item '${args[0]}' in your inventory`));
     } else {
-      return false;
+      if (!caniUseNow) {
+        store.dispatch(console(`Unable to use item '${args[0]}' at this time`));
+        resolve('Use function complete');
+      } else {
+        return false;
+      } 
     }
   });
 };
