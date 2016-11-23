@@ -16,9 +16,9 @@ class Player extends Phaser.Sprite {
     this.game.physics.arcade.enable(this);
     this.body.collideWorldBounds = true;
     this.anchor.set(0.5);
-    this.animations.add('walk_down', [0, 1, 2], ANIMATION_SPEED, true);
+    this.animations.add('walk_up', [0, 1, 2], ANIMATION_SPEED, true);
     this.animations.add('walk_right', [3, 4, 5], ANIMATION_SPEED, true);
-    this.animations.add('walk_up', [6, 7, 8], ANIMATION_SPEED, true);
+    this.animations.add('walk_down', [6, 7, 8], ANIMATION_SPEED, true);
     this.animations.add('walk_left', [9, 10, 11], ANIMATION_SPEED, true);
     window.player = this;
     return this;    
@@ -55,10 +55,10 @@ class Player extends Phaser.Sprite {
               this.x -= 4;
               break;
             case "up":
-              this.y += 4;
+              this.y -= 4;
               break;
             case "down":
-              this.y -= 4;
+              this.y += 4;
               break;
           }
           travelDistance += 4;
@@ -168,14 +168,14 @@ class Player extends Phaser.Sprite {
 
   }
 
-  move_up(distance) {
+  move_down(distance) {
     return new Promise((resolve, reject) => {
       this.game.dispatch(addConsoleMessage(
         `Player moved: up, Distance: ${distance}`
       ));
       let moveDistance = 0;
       const computedDistance = (40*distance);
-      this.animations.play('walk_up');
+      this.animations.play('walk_down');
       let startY = this.y;
       const movement = setInterval(() => {
 
@@ -197,7 +197,7 @@ class Player extends Phaser.Sprite {
   
           this.animations.stop(DEFAULT_FRAME, true);
           clearInterval(movement);
-          this.returnFromCollision(this.y - startY, "down").then((result) => {
+          this.returnFromCollision(this.y - startY, "up").then((result) => {
             console.log('Result', result);
             resolve('Animation Complete');
           });
@@ -207,14 +207,14 @@ class Player extends Phaser.Sprite {
     });
   }
 
-  move_down(distance) {
+  move_up(distance) {
     return new Promise((resolve, reject) => {
       this.game.dispatch(addConsoleMessage(
         `Player moved: down, Distance: ${distance}`
       ));
       let moveDistance = 0;
       const computedDistance = (40*distance);
-      this.animations.play('walk_down');
+      this.animations.play('walk_up');
       let startY = this.y;
       const movement = setInterval(() => {
 
@@ -236,7 +236,7 @@ class Player extends Phaser.Sprite {
   
           this.animations.stop(DEFAULT_FRAME, true);
           clearInterval(movement);
-          this.returnFromCollision(startY - this.y, "up").then((result) => {
+          this.returnFromCollision(startY - this.y, "down").then((result) => {
             console.log('Result', result);
             resolve('Animation Complete');
           });
