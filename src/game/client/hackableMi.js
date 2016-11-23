@@ -20,6 +20,7 @@ export default class extends Phaser.Game {
     this.music = null;
     this.map = null;
     this.collisionGroup = null;
+    this.keyGroup = null;
     this.systemGrid = null;
     this.terminated = false;
     this.nextState = null;

@@ -3,6 +3,7 @@ import { addConsoleMessage } from '../../actions/consoleActions';
 const SPRITE_SHEET = 'mi';
 const DEFAULT_FRAME = 7;
 const ANIMATION_SPEED = 8;
+const MOVE_SPEED = 85;
 
 class Player extends Phaser.Sprite {
 
@@ -29,6 +30,11 @@ class Player extends Phaser.Sprite {
       x: this.x,
       y: this.y,
     };
+  }
+
+  pickUpItem(self, item) {
+    console.log('Picking up', self, item);
+    item.kill();
   }
 
   returnFromCollision(returnDistance, direction) {
@@ -64,7 +70,7 @@ class Player extends Phaser.Sprite {
           travelDistance += 4;
         }
 
-      }, 100);
+      }, MOVE_SPEED);
       resolve('Returned to original position');
     });
   }
@@ -100,7 +106,7 @@ class Player extends Phaser.Sprite {
       const computedDistance = distance > 1 ? (40 * distance) : ((40 * distance));
       const movement = setInterval(() => {
 
-        console.log('Player coords:', this.x, this.y);
+        ////console.log('Player coords:', this.x, this.y);
 
         if(!this.game.isTerminated()) {
 
@@ -108,7 +114,7 @@ class Player extends Phaser.Sprite {
             this.animations.stop(DEFAULT_FRAME, true);
             clearInterval(movement);
             resolve('Animation Complete');
-            console.log('Final coords:', this.x, this.y);
+            //console.log('Final coords:', this.x, this.y);
           } else {
             this.x -= 4;
             moveDistance += 4;
@@ -119,12 +125,12 @@ class Player extends Phaser.Sprite {
           this.animations.stop(DEFAULT_FRAME, true);
           clearInterval(movement);
           this.returnFromCollision(startX - this.x, "right").then((result) => {
-            console.log('Result', result);
+            //console.log('Result', result);
             resolve('Animation Complete');
           });
         }
 
-      }, 100);
+      }, MOVE_SPEED);
     });
   }
 
@@ -139,7 +145,7 @@ class Player extends Phaser.Sprite {
       const startX = this.x;
       const movement = setInterval(() => {
 
-        console.log('Player coords:', this.x, this.y);
+        //console.log('Player coords:', this.x, this.y);
 
         if(!this.game.isTerminated()) {
 
@@ -147,7 +153,7 @@ class Player extends Phaser.Sprite {
             this.animations.stop(DEFAULT_FRAME, true);
             clearInterval(movement);
             resolve('Animation Complete');
-            console.log('Final coords:', this.x, this.y);
+            //console.log('Final coords:', this.x, this.y);
           } else {
             this.x += 4;
             moveDistance += 4;
@@ -158,12 +164,12 @@ class Player extends Phaser.Sprite {
           this.animations.stop(DEFAULT_FRAME, true);
           clearInterval(movement);
           this.returnFromCollision(this.x - startX, "left").then((result) => {
-            console.log('Result', result);
+            //console.log('Result', result);
             resolve('Animation Complete');
           });
         }
 
-      }, 100);
+      }, MOVE_SPEED);
     });
 
   }
@@ -179,7 +185,7 @@ class Player extends Phaser.Sprite {
       let startY = this.y;
       const movement = setInterval(() => {
 
-        console.log('Player coords:', this.x, this.y);
+        //console.log('Player coords:', this.x, this.y);
 
         if(!this.game.isTerminated()) {
 
@@ -187,7 +193,7 @@ class Player extends Phaser.Sprite {
             this.animations.stop(DEFAULT_FRAME, true);
             clearInterval(movement);
             resolve('Animation Complete');
-            console.log('Final coords:', this.x, this.y);
+            //console.log('Final coords:', this.x, this.y);
           } else {
             this.y += 4;
             moveDistance += 4;
@@ -198,12 +204,12 @@ class Player extends Phaser.Sprite {
           this.animations.stop(DEFAULT_FRAME, true);
           clearInterval(movement);
           this.returnFromCollision(this.y - startY, "up").then((result) => {
-            console.log('Result', result);
+            //console.log('Result', result);
             resolve('Animation Complete');
           });
         }
 
-      }, 100);
+      }, MOVE_SPEED);
     });
   }
 
@@ -218,7 +224,7 @@ class Player extends Phaser.Sprite {
       let startY = this.y;
       const movement = setInterval(() => {
 
-        console.log('Player coords:', this.x, this.y);
+        //console.log('Player coords:', this.x, this.y);
 
         if(!this.game.isTerminated()) {
 
@@ -226,7 +232,7 @@ class Player extends Phaser.Sprite {
             this.animations.stop(DEFAULT_FRAME, true);
             clearInterval(movement);
             resolve('Animation Complete');
-            console.log('Final coords:', this.x, this.y);
+            //console.log('Final coords:', this.x, this.y);
           } else {
             this.y -= 4;
             moveDistance += 4;
@@ -237,12 +243,12 @@ class Player extends Phaser.Sprite {
           this.animations.stop(DEFAULT_FRAME, true);
           clearInterval(movement);
           this.returnFromCollision(startY - this.y, "down").then((result) => {
-            console.log('Result', result);
+            //console.log('Result', result);
             resolve('Animation Complete');
           });
         }
 
-      }, 100);
+      }, MOVE_SPEED);
     });
   }
 }

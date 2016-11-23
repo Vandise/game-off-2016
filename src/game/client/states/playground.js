@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import Player from '../objects/player';
 import CollisionGroup from '../groups/collision';
+import KeyGroup from '../groups/key';
 import { setMenu } from '../../actions/menuActions';
 import { addConsoleMessage } from '../../actions/consoleActions';
 
@@ -38,14 +39,7 @@ export default class extends Phaser.State {
     this.game.collisionGroup = new CollisionGroup(
       this.game, this.game.map.objects.collision).load();
 
-
-    const keys = this.game.add.group();
-    keys.enableBody = true;
-
-    // TODO: this.game.map.createFromObjects isn't granular enough...
-    this.game.map.createFromObjects('events', 'silver_key', 'items', 54, true, false, keys);
-
-    console.log(keys);
+    this.game.keyGroup = new KeyGroup(this.game).load();
 
     const position = this.game.map.objects.player[0];
     this.game.player = new Player(this.game, position.x, position.y).load();
@@ -70,6 +64,7 @@ export default class extends Phaser.State {
 
   update() {
     this.game.physics.arcade.collide(this.game.player, this.game.collisionGroup, this.collided, null, this);
+    this.game.physics.arcade.collide(this.game.player, this.game.keyGroup, this.game.player.pickUpItem, null, this);
   }
 
 }
