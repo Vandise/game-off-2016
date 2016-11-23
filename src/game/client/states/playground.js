@@ -11,11 +11,11 @@ export default class extends Phaser.State {
   }
 
   preload() {
-    this.load.image('gridBg', 'assets/gridsquare.jpg', 32, 36);
-    this.load.spritesheet('mi', 'assets/player.png', 32, 36, 12);
-    this.load.audio('dungeon_music', ['assets/audio/dungeon_1.mp3', 'assets/audio/dungeon_2.mp3', 'assets/audio/intro.mp3', ]);
+    //this.load.image('gridBg', 'assets/gridsquare.jpg', 32, 36);
+    //this.load.spritesheet('mi', 'assets/player.png', 32, 36, 12);
+    //this.load.audio('dungeon_music', ['assets/audio/dungeon_1.mp3', 'assets/audio/dungeon_2.mp3', 'assets/audio/intro.mp3', ]);
     this.load.tilemap('playground', 'assets/maps/json/mod_1.json', null, Phaser.Tilemap.TILED_JSON);
-    this.load.image('tiles', 'assets/maps/dungeon.png');
+    //this.load.image('tiles', 'assets/maps/dungeon.png');
   }
 
   create() {
@@ -24,8 +24,10 @@ export default class extends Phaser.State {
 
     this.game.map = this.game.add.tilemap('playground');
     this.game.map.addTilesetImage('dungeon', 'tiles');
+    this.game.map.addTilesetImage('items', 'items');
     this.game.pathLayer = this.game.map.createLayer('path');
     this.game.detailLayer = this.game.map.createLayer('details');
+
     this.game.pathLayer.resizeWorld();
     this.game.detailLayer.resizeWorld();
 
@@ -36,11 +38,17 @@ export default class extends Phaser.State {
     this.game.collisionGroup = new CollisionGroup(
       this.game, this.game.map.objects.collision).load();
 
+
+    const keys = this.game.add.group();
+    keys.enableBody = true;
+
+    // TODO: this.game.map.createFromObjects isn't granular enough...
+    this.game.map.createFromObjects('events', 'silver_key', 'items', 54, true, false, keys);
+
+    console.log(keys);
+
     const position = this.game.map.objects.player[0];
     this.game.player = new Player(this.game, position.x, position.y).load();
-    // testing animations for fun
-    //this.game.player.animations.play('walk_up');
-    //this.game.player.move_up();
 
     this.game.dispatch(setMenu('codeMenu', true));
     this.game.dispatch(setMenu('consoleMenu', true));
@@ -48,6 +56,7 @@ export default class extends Phaser.State {
     this.game.dispatch(addConsoleMessage('Initialized Playground testing area'));
     this.game.music = this.add.audio('dungeon_music');
     this.game.music.play();
+
     return true;
   }
 

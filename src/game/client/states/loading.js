@@ -18,8 +18,9 @@ export default class extends Phaser.State {
     this.load.image('gridBg', 'assets/gridsquare.jpg', 32, 36);
     this.load.audio('dungeon_music', 'assets/audio/dungeon_1.mp3');
     this.load.audio('dungeon_2', 'assets/audio/dungeon_2.mp3');
-    this.load.tilemap('playground', 'assets/maps/json/playground.json', null, Phaser.Tilemap.TILED_JSON);
+    //this.load.tilemap('playground', 'assets/maps/json/playground.json', null, Phaser.Tilemap.TILED_JSON);
     this.load.image('tiles', 'assets/maps/dungeon.png');
+    this.load.spritesheet('items', 'assets/maps/items.png', 40, 40);
     this.game.load.start();
   }
 

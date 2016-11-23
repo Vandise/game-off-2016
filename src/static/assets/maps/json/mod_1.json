@@ -258,6 +258,18 @@
                  "width":40,
                  "x":880,
                  "y":40
+                }, 
+                {
+                 "gid":407,
+                 "height":40,
+                 "id":30,
+                 "name":"silver_key",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":40,
+                 "x":451,
+                 "y":80
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -289,7 +301,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":29,
+ "nextobjectid":31,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":40,
@@ -304,6 +316,19 @@
          "name":"dungeon",
          "spacing":0,
          "tilecount":352,
+         "tileheight":40,
+         "tilewidth":40
+        }, 
+        {
+         "columns":12,
+         "firstgid":353,
+         "image":"items_40x40.png",
+         "imageheight":320,
+         "imagewidth":480,
+         "margin":0,
+         "name":"items",
+         "spacing":0,
+         "tilecount":96,
          "tileheight":40,
          "tilewidth":40
         }],
