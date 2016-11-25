@@ -1,3 +1,4 @@
+import { useItem } from '../../../../actions/playerActions';
 import * as e from '../exceptions/index';
 
 export default (args, context, store, console) => {
@@ -10,11 +11,12 @@ export default (args, context, store, console) => {
     `Function use expects first parameter (item_name) to be type of string, ${typeof args[0]} given`
   );
   return new Promise((resolve, reject) => {
-    const caniUseNow = false;
+    let caniUseNow = false;
+    const client = store.getState().client;
     const item = store.getState().inventory;
-
-    store.getState().client.collisionGroup.deleteNamedGroup('game_end');
-    store.getState().client.gateLayer.visible = true;
+    if (item.name === client.usableItem) {
+      caniUseNow = true;
+    }
 
     if (item === null || item.name != args[0]) {
       store.dispatch(console(`You do not have the item '${args[0]}' in your inventory`));
@@ -23,7 +25,11 @@ export default (args, context, store, console) => {
         store.dispatch(console(`Unable to use item '${args[0]}' at this time`));
         resolve('Use function complete');
       } else {
-        return false;
+        store.dispatch(console(`Using item '${args[0]}'`));
+        store.dispatch(useItem());
+        store.getState().client.collisionGroup.deleteNamedGroup('game_end');
+        store.getState().client.gateLayer.visible = true;
+        resolve('Use function complete');
       } 
     }
   });

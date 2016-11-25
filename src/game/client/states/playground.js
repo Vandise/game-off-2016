@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 import Player from '../objects/player';
 import CollisionGroup from '../groups/collision';
 import KeyGroup from '../groups/key';
-import UseGroup from '../groups/use';
+import EventGroup from '../groups/event';
 import { setMenu } from '../../actions/menuActions';
 import { addConsoleMessage } from '../../actions/consoleActions';
 
@@ -40,7 +40,7 @@ export default class extends Phaser.State {
       this.game, this.game.map.objects.collision).load();
 
     this.game.keyGroup = new KeyGroup(this.game).load();
-    this.game.useGroup = new UseGroup(this.game, this.game.map.objects.events).load();
+    this.game.eventGroup = new EventGroup(this.game, this.game.map.objects.events).load();
 
     const position = this.game.map.objects.player[0];
     this.game.player = new Player(this.game, position.x, position.y).load();
@@ -59,15 +59,27 @@ export default class extends Phaser.State {
     this.game.systemTerminate(true);
   }
 
+  triggerEvent(player, eventTile) {
+    if (eventTile.name === 'use') {
+      this.game.usableItem = eventTile.properties.item_name;
+    }
+    if (eventTile.name === 'game_end') {
+      this.game.paused = true;
+      this.game.dispatch(addConsoleMessage('Stage Complete!'));
+    }
+  }
+
   render() {
     this.game.debug.text(this.game.time.fps, 2, 14, "#00ff00");    
   }
 
   update() {
-    // TODO: when collide is detected / off for an area, enable / disable specific items for the
-    // use function
     this.game.physics.arcade.collide(this.game.player, this.game.collisionGroup, this.collided, null, this);
     this.game.physics.arcade.collide(this.game.player, this.game.keyGroup, this.game.player.pickUpItem, null, this);
+    const hasEvent = this.game.physics.arcade.collide(this.game.player, this.game.eventGroup, this.triggerEvent, null, this);
+    if (!hasEvent) {
+      this.game.usableItem = null;
+    }
   }
 
 }

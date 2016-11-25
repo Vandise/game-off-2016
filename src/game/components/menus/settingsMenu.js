@@ -48,8 +48,8 @@ export default class SettingsMenu extends React.Component {
                 <input
                   type='checkbox'
                   id='eventTiles'
-                  checked={this.state.useGroup}
-                  onChange={() => this.setUserConfiguration('useGroup', 'visible', this.state.useGroup ? false : true)}
+                  checked={this.state.eventGroup}
+                  onChange={() => this.setUserConfiguration('eventGroup', 'visible', this.state.eventGroup ? false : true)}
                 />
               </label>
             </div>

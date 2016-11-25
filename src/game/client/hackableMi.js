@@ -13,6 +13,7 @@ export default class extends Phaser.Game {
     super(width, height, Phaser.AUTO, container, null);
     this.playerInventory = null;
     this.player = null;
+    this.usableItem = null;
     this.isInitialized = false;
     this.state.add('MainMenu', MainMenu, false);
     this.state.add('Playground', Playground, false);
@@ -43,7 +44,7 @@ export default class extends Phaser.Game {
   }
 
   setUserProperty(property, field, value) {
-    const validProperties = ['systemGrid', 'terminated', 'useGroup'];
+    const validProperties = ['systemGrid', 'terminated', 'eventGroup'];
     if (validProperties.indexOf(property) != -1) {
       this[property][field] = value;
     }
@@ -53,7 +54,7 @@ export default class extends Phaser.Game {
     return {
       showBounds: this.collisionGroup.visible,
       systemGrid: this.systemGrid.visible,
-      useGroup: this.useGroup.visible,
+      eventGroup: this.eventGroup.visible,
     };
   }
 
