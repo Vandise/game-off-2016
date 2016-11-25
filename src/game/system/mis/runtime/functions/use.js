@@ -12,6 +12,10 @@ export default (args, context, store, console) => {
   return new Promise((resolve, reject) => {
     const caniUseNow = false;
     const item = store.getState().inventory;
+
+    store.getState().client.collisionGroup.deleteNamedGroup('game_end');
+    store.getState().client.gateLayer.visible = true;
+
     if (item === null || item.name != args[0]) {
       store.dispatch(console(`You do not have the item '${args[0]}' in your inventory`));
     } else {

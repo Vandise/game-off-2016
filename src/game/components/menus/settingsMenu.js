@@ -43,6 +43,17 @@ export default class SettingsMenu extends React.Component {
               </label>
             </div>
             <div>
+              <label htmlFor='eventTiles'>
+                Show Event Tiles: 
+                <input
+                  type='checkbox'
+                  id='eventTiles'
+                  checked={this.state.useGroup}
+                  onChange={() => this.setUserConfiguration('useGroup', 'visible', this.state.useGroup ? false : true)}
+                />
+              </label>
+            </div>
+            <div>
               <label htmlFor='systemGrid'>
                 *Show System Grid: 
                 <input

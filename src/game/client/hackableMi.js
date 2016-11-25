@@ -43,7 +43,7 @@ export default class extends Phaser.Game {
   }
 
   setUserProperty(property, field, value) {
-    const validProperties = ['systemGrid', 'terminated'];
+    const validProperties = ['systemGrid', 'terminated', 'useGroup'];
     if (validProperties.indexOf(property) != -1) {
       this[property][field] = value;
     }
@@ -53,6 +53,7 @@ export default class extends Phaser.Game {
     return {
       showBounds: this.collisionGroup.visible,
       systemGrid: this.systemGrid.visible,
+      useGroup: this.useGroup.visible,
     };
   }
 
