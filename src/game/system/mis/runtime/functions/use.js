@@ -14,7 +14,7 @@ export default (args, context, store, console) => {
     let caniUseNow = false;
     const client = store.getState().client;
     const item = store.getState().inventory;
-    if (item.name === client.usableItem) {
+    if (item && item.name === client.usableItem) {
       caniUseNow = true;
     }
 
