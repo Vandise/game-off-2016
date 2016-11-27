@@ -170,3 +170,11 @@ Utilizes the current item in the inventory. Outputs a console message stating if
 ```
 use("silver_key")
 ```
+
+#### caniUse [item_name<string>] -> boolean, console message
+Checks if the current item in inventory is usable at the current tile. Returns true or false with a console message.
+```
+if caniUse("silver_key")
+  do something here
+end
+```
