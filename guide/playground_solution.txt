@@ -1,0 +1,18 @@
+i := 0
+until i = 8 do
+  log("Iteration is:", i)
+  if (i % 2) = 0
+    move("right", 3)
+  end
+  if (i % 2) != 0
+    move("up", 3)
+  end
+  i := i + 1
+end
+
+until caniUse("silver_key") do
+  move("right")
+end
+
+use("silver_key")
+move("up")

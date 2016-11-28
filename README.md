@@ -3,12 +3,9 @@ Guide Mi through an array of puzzles and mazes with code.
 
 ## Guide
 - [Play on Heroku](https://hackablemi.herokuapp.com/)
-- The UI
-- MiS(ript) Basics
-- Your First Puzzle
+- [Playground Puzzle Video Tutorial](https://www.youtube.com/watch?v=zomOZFXda2g)
+- [Playground Solution](https://github.com/Vandise/game-off-2016/blob/hackablemi/guide/playground_solution.txt)
 - [MiS(ript) Reference](https://github.com/Vandise/game-off-2016/blob/hackablemi/guide/mis_reference.md)
-- Contributing / Bug Report
-- Feature Development
 
 ## Setup
 Clone this repository
